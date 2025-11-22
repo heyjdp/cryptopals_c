@@ -1,14 +1,16 @@
+/**
+ * @file score_english_hex.c
+ * @brief Implementation of English scoring for hex-encoded strings.
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 
-/*
- * English letter frequencies (a-z + space) as proportions.
- * Roughly based on typical English text frequency analyses.
- * They should sum to about 1.0.
+/**
+ * @brief English letter frequency proportions for a-z plus space.
  *
- * Index 0-25: 'a'-'z'
- * Index 26:   ' '
+ * Index 0-25 correspond to 'a'-'z' and index 26 represents space.
  */
 static const double english_freq[27] = {
     0.0817, // a
@@ -40,7 +42,12 @@ static const double english_freq[27] = {
     0.1300  // space (very common in normal English text)
 };
 
-/* Convert a single hex character to its integer value, or -1 on error. */
+/**
+ * @brief Convert a single hex character to its integer value.
+ *
+ * @param c Hex digit to convert.
+ * @return 0-15 on success or -1 on invalid characters.
+ */
 static int hex_value(char c) {
     if (c >= '0' && c <= '9') return c - '0';
     if (c >= 'a' && c <= 'f') return 10 + (c - 'a');
@@ -48,12 +55,7 @@ static int hex_value(char c) {
     return -1;
 }
 
-/*
- * Score how "English-like" a hex-encoded ASCII string is.
- * Higher scores are better.
- *
- * Returns a large negative number on invalid hex or clearly non-English bytes.
- */
+/** @brief Implementation of score_english_hex(). */
 double score_english_hex(const char *hex) {
     size_t hex_len = strlen(hex);
     if (hex_len == 0 || (hex_len & 1)) {

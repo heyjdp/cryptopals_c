@@ -1,9 +1,20 @@
+/**
+ * @file score_english_hex_main.c
+ * @brief CLI utility that scores hex data for English-likeness.
+ */
+
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "score_english_hex.h"
 
+/**
+ * @brief Map a raw English score to a 0-100 percentage.
+ *
+ * @param raw Score returned by score_english_hex().
+ * @return Normalized percentage.
+ */
 static double score_to_percentage(double raw) {
     if (raw < -1e8) {
         return 0.0;
@@ -19,6 +30,11 @@ static double score_to_percentage(double raw) {
     return normalized;
 }
 
+/**
+ * @brief Read hex from stdin, score it, and print a percentage.
+ *
+ * @return EXIT_SUCCESS on valid input, EXIT_FAILURE otherwise.
+ */
 int main(void) {
     size_t capacity = 1024;
     size_t len = 0;

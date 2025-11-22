@@ -1,3 +1,8 @@
+/**
+ * @file fixed_xor.c
+ * @brief Implementation of fixed-length buffer XOR helpers.
+ */
+
 #include "fixed_xor.h"
 
 #include <errno.h>
@@ -9,6 +14,7 @@
 
 #define FIXED_XOR_CHUNK 4096
 
+/** @brief Implementation of fixed_xor_buffers(). */
 fixed_xor_status fixed_xor_buffers(const unsigned char *lhs,
                                    const unsigned char *rhs,
                                    unsigned char *out,
@@ -25,6 +31,14 @@ fixed_xor_status fixed_xor_buffers(const unsigned char *lhs,
     return FIXED_XOR_OK;
 }
 
+/**
+ * @brief Ensure that @p buffer has capacity for @p required bytes.
+ *
+ * @param buffer   Pointer to heap storage pointer to grow.
+ * @param capacity Current capacity in bytes (updated on success).
+ * @param required Target capacity required by the caller.
+ * @return FIXED_XOR_OK on success or FIXED_XOR_ERR_OOM on allocation failure.
+ */
 static fixed_xor_status fixed_xor_grow(unsigned char **buffer,
                                        size_t *capacity,
                                        size_t required) {
@@ -50,6 +64,7 @@ static fixed_xor_status fixed_xor_grow(unsigned char **buffer,
     return FIXED_XOR_OK;
 }
 
+/** @brief Implementation of fixed_xor_stream(). */
 fixed_xor_status fixed_xor_stream(FILE *in, FILE *out) {
     if (!in || !out) {
         errno = EINVAL;
@@ -106,6 +121,7 @@ fixed_xor_status fixed_xor_stream(FILE *in, FILE *out) {
     return FIXED_XOR_OK;
 }
 
+/** @brief Implementation of fixed_xor_status_string(). */
 const char *fixed_xor_status_string(fixed_xor_status status) {
     switch (status) {
         case FIXED_XOR_OK:

@@ -30,6 +30,11 @@
    For more information, please refer to <http://unlicense.org/>
 */
 
+/**
+ * @file utest.h
+ * @brief Single-header unit testing framework by Sean Middleditch.
+ */
+
 #ifndef SHEREDOM_UTEST_H_INCLUDED
 #define SHEREDOM_UTEST_H_INCLUDED
 

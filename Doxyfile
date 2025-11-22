@@ -1,0 +1,27 @@
+# Doxygen configuration for the cryptopals_c project.
+
+PROJECT_NAME           = "cryptopals_c"
+PROJECT_BRIEF          = "C implementations of Cryptopals challenges and helpers."
+OUTPUT_DIRECTORY       = docs
+CREATE_SUBDIRS         = NO
+OPTIMIZE_OUTPUT_FOR_C  = YES
+EXTRACT_STATIC         = YES
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+INPUT                  = header lib tools cryptopals tests README.md
+FILE_PATTERNS          = *.c *.h *.md
+RECURSIVE              = YES
+INPUT_ENCODING         = UTF-8
+OUTPUT_LANGUAGE        = English
+FULL_PATH_NAMES        = NO
+STRIP_FROM_PATH        = .
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = NO
+GENERATE_HTML          = NO
+GENERATE_LATEX         = YES
+LATEX_OUTPUT           = latex
+USE_PDFLATEX           = YES
+PDF_HYPERLINKS         = YES
+INTERACTIVE_SVG        = NO
+GENERATE_TREEVIEW      = NO

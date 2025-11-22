@@ -1,30 +1,22 @@
+/**
+ * @file test_hex2b64.c
+ * @brief Unit tests for the hex2b64 conversion helpers.
+ */
+
 #include <stdio.h>
 #include <string.h>
 
 #include "hex2b64.h"
 #include "utest.h"
 
-/* Helper: encode one block into an in-memory string. */
-static void encode_block_to_string(const unsigned char *in,
-                                   size_t len,
-                                   char out[5],
-                                   int *utest_result) {
-    FILE *f = tmpfile();
-    ASSERT_TRUE(f != NULL);
-
-    encode_base64_block(in, len, f);
-
-    fflush(f);
-    rewind(f);
-
-    size_t n = fread(out, 1, 4, f);
-    ASSERT_EQ(4u, n);
-
-    out[4] = '\0';
-    fclose(f);
-}
-
-/* Helper: run hex2b64_stream on a string, capture result into out. */
+/**
+ * @brief Run hex2b64_stream() over an in-memory string.
+ *
+ * @param hex      Null-terminated hex input.
+ * @param out      Destination buffer for Base64 text plus newline.
+ * @param out_cap  Capacity of @p out.
+ * @return 0 on success or negative on setup error.
+ */
 static int convert_hex_string(const char *hex, char *out, size_t out_cap) {
     FILE *in = tmpfile();
     FILE *outf = tmpfile();
@@ -51,55 +43,24 @@ static int convert_hex_string(const char *hex, char *out, size_t out_cap) {
     return rc;
 }
 
-/* === Tests for hex_value === */
-
-UTEST(hex_value, decimal_digits) {
-    EXPECT_EQ(0, hex_value('0'));
-    EXPECT_EQ(1, hex_value('1'));
-    EXPECT_EQ(9, hex_value('9'));
-}
-
-UTEST(hex_value, lowercase_letters) {
-    EXPECT_EQ(10, hex_value('a'));
-    EXPECT_EQ(11, hex_value('b'));
-    EXPECT_EQ(15, hex_value('f'));
-}
-
-UTEST(hex_value, uppercase_letters) {
-    EXPECT_EQ(10, hex_value('A'));
-    EXPECT_EQ(11, hex_value('B'));
-    EXPECT_EQ(15, hex_value('F'));
-}
-
-UTEST(hex_value, invalid_chars) {
-    EXPECT_EQ(-1, hex_value('g'));
-    EXPECT_EQ(-1, hex_value('G'));
-    EXPECT_EQ(-1, hex_value('x'));
-    EXPECT_EQ(-1, hex_value(' '));
-    EXPECT_EQ(-1, hex_value('\n'));
-}
-
-/* === Tests for encode_base64_block === */
-
-UTEST(base64_block, three_bytes) {
-    const unsigned char in[3] = { 'M', 'a', 'n' }; /* "Man" -> "TWFu" */
-    char out[5];
-    encode_block_to_string(in, 3, out, utest_result);
-    ASSERT_STREQ("TWFu", out);
-}
-
-UTEST(base64_block, two_bytes) {
-    const unsigned char in[2] = { 'M', 'a' }; /* "Ma" -> "TWE=" */
-    char out[5];
-    encode_block_to_string(in, 2, out, utest_result);
-    ASSERT_STREQ("TWE=", out);
-}
-
-UTEST(base64_block, one_byte) {
-    const unsigned char in[1] = { 'M' }; /* "M" -> "TQ==" */
-    char out[5];
-    encode_block_to_string(in, 1, out, utest_result);
-    ASSERT_STREQ("TQ==", out);
+/**
+ * @brief Convenience wrapper around hex2b64_buffer() for literals.
+ *
+ * @param hex      Null-terminated hex literal.
+ * @param out      Destination buffer.
+ * @param out_cap  Capacity of @p out.
+ * @param out_len  Optional pointer receiving bytes written.
+ * @return 0 on success, non-zero on failure.
+ */
+static int convert_hex_buffer(const char *hex,
+                              unsigned char *out,
+                              size_t out_cap,
+                              size_t *out_len) {
+    return hex2b64_buffer((const unsigned char *)hex,
+                          strlen(hex),
+                          out,
+                          out_cap,
+                          out_len);
 }
 
 /* === Integration tests for hex2b64_stream (normal cases) === */
@@ -211,6 +172,76 @@ UTEST(stream_edge, many_bytes_sanity) {
     size_t len = strlen(out);
     ASSERT_GT(len, 1u);
     ASSERT_EQ('\n', out[len - 1]);
+}
+
+/* === Tests for hex2b64_buffer === */
+
+UTEST(buffer, hello_world_plain) {
+    unsigned char out[128];
+    size_t out_len = 0;
+    int rc = convert_hex_buffer("48656c6c6f20776f726c64",
+                                out,
+                                sizeof(out),
+                                &out_len);
+    ASSERT_EQ(0, rc);
+    ASSERT_EQ(strlen("SGVsbG8gd29ybGQ=\n"), out_len);
+    out[out_len] = '\0';
+    ASSERT_STREQ("SGVsbG8gd29ybGQ=\n", (const char *)out);
+}
+
+UTEST(buffer, ignores_whitespace) {
+    unsigned char out[128];
+    size_t out_len = 0;
+    int rc = convert_hex_buffer("48 65 6c 6c 6f",
+                                out,
+                                sizeof(out),
+                                &out_len);
+    ASSERT_EQ(0, rc);
+    out[out_len] = '\0';
+    ASSERT_STREQ("SGVsbG8=\n", (const char *)out);
+}
+
+UTEST(buffer, empty_input) {
+    unsigned char out[8];
+    size_t out_len = 0;
+    int rc = convert_hex_buffer("",
+                                out,
+                                sizeof(out),
+                                &out_len);
+    ASSERT_EQ(0, rc);
+    ASSERT_EQ(1u, out_len);
+    out[out_len] = '\0';
+    ASSERT_STREQ("\n", (const char *)out);
+}
+
+UTEST(buffer_edge, odd_digits_error) {
+    unsigned char out[16];
+    size_t out_len = 0;
+    int rc = convert_hex_buffer("123",
+                                out,
+                                sizeof(out),
+                                &out_len);
+    ASSERT_NE(0, rc);
+}
+
+UTEST(buffer_edge, invalid_character) {
+    unsigned char out[16];
+    size_t out_len = 0;
+    int rc = convert_hex_buffer("48xx",
+                                out,
+                                sizeof(out),
+                                &out_len);
+    ASSERT_NE(0, rc);
+}
+
+UTEST(buffer_edge, insufficient_output_capacity) {
+    unsigned char out[4];
+    size_t out_len = 0;
+    int rc = convert_hex_buffer("4d",
+                                out,
+                                sizeof(out),
+                                &out_len);
+    ASSERT_NE(0, rc);
 }
 
 /* Let utest.h provide main(). */

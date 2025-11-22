@@ -1,3 +1,8 @@
+/**
+ * @file test_score_english_hex.c
+ * @brief Unit tests for the English scoring heuristic.
+ */
+
 #include "score_english_hex.h"
 #include "utest.h"
 

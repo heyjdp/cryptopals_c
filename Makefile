@@ -29,7 +29,15 @@ TEST_BINS := $(patsubst %, $(TEST_BIN_DIR)/test_%, $(TESTS))
 
 all: $(TOOL_BINS) $(CRYPT_TARGETS)
 
-.PHONY: all tools tests test cryptopals clean
+.PHONY: all build tools tests test cryptopals clean docs
+
+all:
+	$(MAKE) clean
+	$(MAKE) build
+	$(MAKE) docs
+	$(MAKE) test
+
+build: $(TOOL_BINS) $(CRYPT_TARGETS)
 
 tools: $(TOOL_BINS)
 
@@ -64,6 +72,12 @@ TEST_COMMAND := for t in $(TEST_BINS); do echo "Running $$t"; $$t || exit $$?; d
 
 test: tests
 	@$(TEST_COMMAND)
+
+docs:
+	doxygen Doxyfile
+	$(MAKE) -C docs/latex
+	mv docs/latex/refman.pdf docs/refman.pdf
+	rm -rf docs/latex
 
 clean:
 	rm -rf $(BUILD_DIR) $(BIN_DIR)
