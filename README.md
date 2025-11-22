@@ -4,6 +4,5 @@ Basically a quiet Saturday and I am bored, so I am speedrunning the Cryptopals c
 
 ## References
 
-(https://cryptopals.com/)[https://cryptopals.com/]
-
+https://cryptopals.com/(https://cryptopals.com/)
 
