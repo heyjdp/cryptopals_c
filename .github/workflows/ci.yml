@@ -15,7 +15,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential doxygen texlive-latex-base
+          sudo apt-get install -y build-essential doxygen texlive-full texlive-fonts-recommended texlive-fonts-extra
       - name: Build tools and challenges
         run: make
       - name: Run tests
