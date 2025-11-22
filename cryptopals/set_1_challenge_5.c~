@@ -12,8 +12,8 @@
 #include "utils.h"
 
 static void
-free_buffers(uint8_t *plaintext,
-    uint8_t *key_stream, uint8_t *cipher, char *cipher_hex)
+free_buffers(uint8_t * plaintext,
+    uint8_t * key_stream, uint8_t * cipher, char *cipher_hex)
 {
 	free(plaintext);
 	free(key_stream);
