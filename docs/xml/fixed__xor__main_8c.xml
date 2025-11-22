@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="fixed__xor__main_8c" kind="file" language="C++">
+    <compoundname>fixed_xor_main.c</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes refid="fixed__xor_8h" local="yes">fixed_xor.h</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>fixed_xor.h</label>
+        <link refid="fixed__xor_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>fixed_xor_main.c</label>
+        <link refid="fixed__xor__main_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>stddef.h</label>
+      </node>
+      <node id="2">
+        <label>stdio.h</label>
+      </node>
+      <node id="3">
+        <label>stdlib.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="fixed__xor__main_8c_1a840291bc02cba5474a4cb46a9b9566fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int main</definition>
+        <argsstring>(void)</argsstring>
+        <name>main</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Entry point that streams stdin through <ref refid="fixed__xor_8h_1a1719a7f89364714ae3b944a4772f8eb5" kindref="member">fixed_xor_stream()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>EXIT_SUCCESS on success, EXIT_FAILURE otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tools/fixed_xor_main.c" line="16" column="5" bodyfile="/home/jas/code/cryptopals_c/tools/fixed_xor_main.c" bodystart="16" bodyend="24"/>
+        <references refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da62b5a3e4939e730e99e13fedce37741d" compoundref="fixed__xor_8h" startline="16">FIXED_XOR_OK</references>
+        <references refid="fixed__xor_8h_1afd02583938bcd7d4f11baa18e23279d4" compoundref="fixed__xor_8c" startline="125" endline="140">fixed_xor_status_string</references>
+        <references refid="fixed__xor_8h_1a1719a7f89364714ae3b944a4772f8eb5" compoundref="fixed__xor_8c" startline="68" endline="122">fixed_xor_stream</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Command-line wrapper for XORing two equal-length buffers. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="fixed__xor_8h" kindref="compound">fixed_xor.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="fixed__xor__main_8c_1a840291bc02cba5474a4cb46a9b9566fe" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="fixed__xor__main_8c_1a840291bc02cba5474a4cb46a9b9566fe" kindref="member">main</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6d" kindref="member">fixed_xor_status</ref><sp/>status<sp/>=<sp/><ref refid="fixed__xor_8h_1a1719a7f89364714ae3b944a4772f8eb5" kindref="member">fixed_xor_stream</ref>(stdin,<sp/>stdout);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(status<sp/>!=<sp/><ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da62b5a3e4939e730e99e13fedce37741d" kindref="member">FIXED_XOR_OK</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(stderr,<sp/></highlight><highlight class="stringliteral">&quot;fixed_xor:<sp/>%s\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="fixed__xor_8h_1afd02583938bcd7d4f11baa18e23279d4" kindref="member">fixed_xor_status_string</ref>(status));</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>EXIT_FAILURE;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>EXIT_SUCCESS;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/jas/code/cryptopals_c/tools/fixed_xor_main.c"/>
+  </compounddef>
+</doxygen>

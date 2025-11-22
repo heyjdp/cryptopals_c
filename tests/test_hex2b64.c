@@ -1,6 +1,5 @@
-/**
- * @file test_hex2b64.c
- * @brief Unit tests for the hex2b64 conversion helpers.
+/*
+ * Unit tests for the hex2b64 conversion helpers.
  */
 
 #include <stdio.h>
@@ -9,13 +8,8 @@
 #include "hex2b64.h"
 #include "utest.h"
 
-/**
- * @brief Run hex2b64_stream() over an in-memory string.
- *
- * @param hex      Null-terminated hex input.
- * @param out      Destination buffer for Base64 text plus newline.
- * @param out_cap  Capacity of @p out.
- * @return 0 on success or negative on setup error.
+/*
+ * Run hex2b64_stream() over an in-memory string and capture its output in out.
  */
 static int convert_hex_string(const char *hex, char *out, size_t out_cap) {
     FILE *in = tmpfile();
@@ -43,14 +37,8 @@ static int convert_hex_string(const char *hex, char *out, size_t out_cap) {
     return rc;
 }
 
-/**
- * @brief Convenience wrapper around hex2b64_buffer() for literals.
- *
- * @param hex      Null-terminated hex literal.
- * @param out      Destination buffer.
- * @param out_cap  Capacity of @p out.
- * @param out_len  Optional pointer receiving bytes written.
- * @return 0 on success, non-zero on failure.
+/*
+ * Convenience wrapper around hex2b64_buffer() for string literals.
  */
 static int convert_hex_buffer(const char *hex,
                               unsigned char *out,

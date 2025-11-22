@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="set__1__challenge__1_8c" kind="file" language="C++">
+    <compoundname>set_1_challenge_1.c</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <includes refid="hex2b64_8h" local="yes">hex2b64.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>set_1_challenge_1.c</label>
+        <link refid="set__1__challenge__1_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>hex2b64.h</label>
+        <link refid="hex2b64_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>stddef.h</label>
+      </node>
+      <node id="2">
+        <label>stdio.h</label>
+      </node>
+      <node id="3">
+        <label>stdlib.h</label>
+      </node>
+      <node id="4">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="set__1__challenge__1_8c_1a840291bc02cba5474a4cb46a9b9566fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int main</definition>
+        <argsstring>(void)</argsstring>
+        <name>main</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Convert the fixed challenge hex string and compare to expected Base64. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>EXIT_SUCCESS when the conversion matches the known answer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/cryptopals/set_1_challenge_1.c" line="17" column="5" bodyfile="/home/jas/code/cryptopals_c/cryptopals/set_1_challenge_1.c" bodystart="17" bodyend="42"/>
+        <references refid="hex2b64_8h_1a05acf5abc39b18e4f74da2c2a2a7415d" compoundref="hex2b64_8c" startline="123" endline="196">hex2b64_buffer</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Cryptopals Set 1 Challenge 1 sample solution using <ref refid="hex2b64_8h_1a05acf5abc39b18e4f74da2c2a2a7415d" kindref="member">hex2b64_buffer()</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hex2b64_8h" kindref="compound">hex2b64.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="set__1__challenge__1_8c_1a840291bc02cba5474a4cb46a9b9566fe" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="set__1__challenge__1_8c_1a840291bc02cba5474a4cb46a9b9566fe" kindref="member">main</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*hex_input<sp/>=</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*expected_b64<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buffer[256];</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>out_len<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="hex2b64_8h_1a05acf5abc39b18e4f74da2c2a2a7415d" kindref="member">hex2b64_buffer</ref>((</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)hex_input,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strlen(hex_input),</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>buffer,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(buffer),</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;out_len);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(rc<sp/>!=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(stderr,<sp/></highlight><highlight class="stringliteral">&quot;hex2b64_buffer<sp/>failed\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>EXIT_FAILURE;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[out_len]<sp/>=<sp/></highlight><highlight class="charliteral">&apos;\0&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(strcmp((</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)buffer,<sp/>expected_b64)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(stdout,<sp/></highlight><highlight class="stringliteral">&quot;PASS:<sp/>%s<sp/>==<sp/>%s\n&quot;</highlight><highlight class="normal">,<sp/>hex_input,<sp/>expected_b64);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>EXIT_SUCCESS;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>fprintf(stdout,<sp/></highlight><highlight class="stringliteral">&quot;FAIL:<sp/>%s<sp/>!=<sp/>%s\n&quot;</highlight><highlight class="normal">,<sp/>hex_input,<sp/>expected_b64);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>EXIT_FAILURE;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/jas/code/cryptopals_c/cryptopals/set_1_challenge_1.c"/>
+  </compounddef>
+</doxygen>

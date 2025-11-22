@@ -25,3 +25,128 @@ USE_PDFLATEX           = YES
 PDF_HYPERLINKS         = YES
 INTERACTIVE_SVG        = NO
 GENERATE_TREEVIEW      = NO
+
+#---------------------------------------------------------------------------
+# Project Information
+#---------------------------------------------------------------------------
+
+PROJECT_NAME           = "cryptopals_c"
+PROJECT_BRIEF          = "C implementations of Cryptopals challenges and helpers."
+PROJECT_LOGO           = docs/theme/logo.png
+
+OUTPUT_DIRECTORY       = docs
+FULL_PATH_NAMES        = NO
+STRIP_FROM_PATH        = src
+
+#---------------------------------------------------------------------------
+# Build Options
+#---------------------------------------------------------------------------
+
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_ANON_NSPACES   = YES
+
+RECURSIVE              = YES
+OPTIMIZE_OUTPUT_FOR_C  = YES
+
+#---------------------------------------------------------------------------
+# Input Files
+#---------------------------------------------------------------------------
+
+INPUT                  = header lib tools cryptopals README.md
+EXCLUDE                =  ./header/utest.h
+FILE_PATTERNS          = *.c *.h *.md
+USE_MDFILE_AS_MAINPAGE = README.md
+RECURSIVE              = YES
+INPUT_ENCODING         = UTF-8
+OUTPUT_LANGUAGE        = English
+
+#---------------------------------------------------------------------------
+# Output Formats
+#---------------------------------------------------------------------------
+
+# HTML
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_DYNAMIC_SECTIONS  = YES
+SEARCHENGINE           = YES
+GENERATE_TREEVIEW      = YES
+
+# LaTeX/PDF
+GENERATE_LATEX         = YES
+LATEX_OUTPUT           = latex
+LATEX_CMD_NAME         = pdflatex
+MAKEINDEX_CMD_NAME     = makeindex
+COMPACT_LATEX          = NO
+PAPER_TYPE             = a4
+PDF_HYPERLINKS         = YES
+USE_PDFLATEX           = YES
+LATEX_BATCHMODE        = NO
+LATEX_HIDE_INDICES     = NO
+
+# This pulls in your custom LaTeX styling
+LATEX_EXTRA_STYLESHEET = docs/theme/custom.sty
+
+# Extra assets (logo, etc.) copied into LaTeX output dir
+LATEX_EXTRA_FILES      = \
+  docs/theme/logo-pdf.pdf
+
+#---------------------------------------------------------------------------
+# Diagrams (Graphviz)
+#---------------------------------------------------------------------------
+
+HAVE_DOT               = YES
+DOT_NUM_THREADS        = 4
+DOT_GRAPH_MAX_NODES    = 200
+CLASS_DIAGRAMS         = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+INTERACTIVE_SVG        = YES
+DOT_IMAGE_FORMAT       = svg
+
+#---------------------------------------------------------------------------
+# Styling / Appearance (HTML)
+#---------------------------------------------------------------------------
+
+HTML_COLORSTYLE        = LIGHT
+HTML_EXTRA_STYLESHEET  = docs/theme/custom.css
+HTML_EXTRA_FILES       = docs/theme/logo.svg
+
+TOC_INCLUDE_HEADINGS   = 3
+INLINE_SIMPLE_STRUCTS  = YES
+SEPARATE_MEMBER_PAGES  = NO
+DISABLE_INDEX          = NO
+
+#---------------------------------------------------------------------------
+# Documentation Quality and Warnings
+#---------------------------------------------------------------------------
+
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+WARN_NO_PARAMDOC       = YES
+
+QUIET                  = NO
+# Turn this to YES if you want docs problems to break CI
+WARN_AS_ERROR          = NO
+
+#---------------------------------------------------------------------------
+# Markdown and Preprocessing
+#---------------------------------------------------------------------------
+
+MARKDOWN_SUPPORT       = YES
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = NO
+SKIP_FUNCTION_MACROS   = NO
+
+#---------------------------------------------------------------------------
+# Cross-referencing
+#---------------------------------------------------------------------------
+
+REFERENCES_RELATION    = YES
+REFERENCES_LINK_SOURCE = YES
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO

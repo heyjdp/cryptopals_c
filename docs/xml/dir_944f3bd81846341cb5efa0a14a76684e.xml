@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_944f3bd81846341cb5efa0a14a76684e" kind="dir">
+    <compoundname>code</compoundname>
+    <innerdir refid="dir_1a96690517657eee7ed31dd6d1803d2f">cryptopals_c</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jas/code/"/>
+  </compounddef>
+</doxygen>

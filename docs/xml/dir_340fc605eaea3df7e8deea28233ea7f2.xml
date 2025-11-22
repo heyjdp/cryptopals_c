@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_340fc605eaea3df7e8deea28233ea7f2" kind="dir">
+    <compoundname>tools</compoundname>
+    <innerfile refid="fixed__xor__main_8c">fixed_xor_main.c</innerfile>
+    <innerfile refid="hex2b64__main_8c">hex2b64_main.c</innerfile>
+    <innerfile refid="score__english__hex__main_8c">score_english_hex_main.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jas/code/cryptopals_c/tools/"/>
+  </compounddef>
+</doxygen>

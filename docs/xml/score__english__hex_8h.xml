@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="score__english__hex_8h" kind="file" language="C++">
+    <compoundname>score_english_hex.h</compoundname>
+    <includedby refid="score__english__hex__main_8c" local="yes">score_english_hex_main.c</includedby>
+    <invincdepgraph>
+      <node id="1">
+        <label>score_english_hex.h</label>
+        <link refid="score__english__hex_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>score_english_hex_main.c</label>
+        <link refid="score__english__hex__main_8c"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="score__english__hex_8h_1a770ce26eb74de6eec1bb9e19d8eb7995" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double score_english_hex</definition>
+        <argsstring>(const char *hex)</argsstring>
+        <name>score_english_hex</name>
+        <param>
+          <type>const char *</type>
+          <declname>hex</declname>
+        </param>
+        <briefdescription>
+<para>Score a hex string based on English letter frequency heuristics. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Null-terminated ASCII hex string. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Higher values indicate closer resemblance to English text.</para>
+</simplesect>
+Score a hex string based on English letter frequency heuristics. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/header/score_english_hex.h" line="15" column="8" bodyfile="/home/jas/code/cryptopals_c/lib/score_english_hex.c" bodystart="59" bodyend="126" declfile="/home/jas/code/cryptopals_c/header/score_english_hex.h" declline="15" declcolumn="8"/>
+        <references refid="score__english__hex_8c_1a2f11d4aa0233eaa704afb1c3eacbd280" compoundref="score__english__hex_8c" startline="15" endline="43">english_freq</references>
+        <references refid="score__english__hex_8c_1a135cb3167b46a5d935a4576da8f9af96" compoundref="score__english__hex_8c" startline="51" endline="56">hex_value</references>
+        <referencedby refid="score__english__hex__main_8c_1a840291bc02cba5474a4cb46a9b9566fe" compoundref="score__english__hex__main_8c" startline="38" endline="87">main</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Estimate how closely hex-encoded data resembles English text. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SCORE_ENGLISH_HEX_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SCORE_ENGLISH_HEX_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="score__english__hex_8h_1a770ce26eb74de6eec1bb9e19d8eb7995" kindref="member">score_english_hex</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*hex);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>SCORE_ENGLISH_HEX_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jas/code/cryptopals_c/header/score_english_hex.h"/>
+  </compounddef>
+</doxygen>

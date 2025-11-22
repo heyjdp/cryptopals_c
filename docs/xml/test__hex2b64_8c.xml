@@ -1,0 +1,798 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="test__hex2b64_8c" kind="file" language="C++">
+    <compoundname>test_hex2b64.c</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">string.h</includes>
+    <includes refid="hex2b64_8h" local="yes">hex2b64.h</includes>
+    <includes refid="utest_8h" local="yes">utest.h</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>hex2b64.h</label>
+        <link refid="hex2b64_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>utest.h</label>
+        <link refid="utest_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>test_hex2b64.c</label>
+        <link refid="test__hex2b64_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>errno.h</label>
+      </node>
+      <node id="10">
+        <label>inttypes.h</label>
+      </node>
+      <node id="5">
+        <label>stddef.h</label>
+      </node>
+      <node id="7">
+        <label>stdint.h</label>
+      </node>
+      <node id="2">
+        <label>stdio.h</label>
+      </node>
+      <node id="8">
+        <label>stdlib.h</label>
+      </node>
+      <node id="3">
+        <label>string.h</label>
+      </node>
+      <node id="11">
+        <label>unistd.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int convert_hex_string</definition>
+        <argsstring>(const char *hex, char *out, size_t out_cap)</argsstring>
+        <name>convert_hex_string</name>
+        <param>
+          <type>const char *</type>
+          <declname>hex</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>out_cap</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="14" column="12" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="14" bodyend="38"/>
+        <references refid="hex2b64_8h_1ac4d5fb00f18155944f6038d75dc86884" compoundref="hex2b64_8c" startline="70" endline="120">hex2b64_stream</references>
+        <referencedby refid="test__hex2b64_8c_1af8dbb048976d5cbccf8c9e41b3fcee10" compoundref="test__hex2b64_8c" startline="56" endline="62">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1acf57bbb77d08db9017e1fa3a5bdbfef5" compoundref="test__hex2b64_8c" startline="64" endline="70">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1aa12ffbf5e6132216a64d92259aab1292" compoundref="test__hex2b64_8c" startline="73" endline="78">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1af348845c7be6ba5a20285759248898d2" compoundref="test__hex2b64_8c" startline="83" endline="88">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1abc6162c4396a8161534925c186497b64" compoundref="test__hex2b64_8c" startline="130" endline="134">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1a239c3536ec68961c5ccd0ebe8ff22c5f" compoundref="test__hex2b64_8c" startline="137" endline="141">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1a07d4baf0f5b27b2c16f884732e3beaa4" compoundref="test__hex2b64_8c" startline="144" endline="163">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1a251bc0fd63e0c3fbfd5b101fcbfe9dcc" compoundref="test__hex2b64_8c" startline="123" endline="127">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1a4fe99bdc1efe6c5827cc54f782b46003" compoundref="test__hex2b64_8c" startline="99" endline="104">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1a226b9e8a57bc57a4e7ec90516a974905" compoundref="test__hex2b64_8c" startline="115" endline="120">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1af2bb95c9017d4478a8939eaeeb5c1f53" compoundref="test__hex2b64_8c" startline="107" endline="112">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1aa1f20b59bafcaf3f7f8eb39bf1303e02" compoundref="test__hex2b64_8c" startline="91" endline="96">UTEST</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int convert_hex_buffer</definition>
+        <argsstring>(const char *hex, unsigned char *out, size_t out_cap, size_t *out_len)</argsstring>
+        <name>convert_hex_buffer</name>
+        <param>
+          <type>const char *</type>
+          <declname>hex</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>out_cap</declname>
+        </param>
+        <param>
+          <type>size_t *</type>
+          <declname>out_len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="43" column="12" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="43" bodyend="52"/>
+        <references refid="hex2b64_8h_1a05acf5abc39b18e4f74da2c2a2a7415d" compoundref="hex2b64_8c" startline="123" endline="196">hex2b64_buffer</references>
+        <referencedby refid="test__hex2b64_8c_1a50cc55be417b255feff74a99f1c8746a" compoundref="test__hex2b64_8c" startline="192" endline="203">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1ad6f560ee5b7d38b167e7d1bca6a6e2ed" compoundref="test__hex2b64_8c" startline="167" endline="178">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1ab9e29fee76486b9927f17c271035f4b6" compoundref="test__hex2b64_8c" startline="180" endline="190">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1afb27bd98674fda637748aeb58b390e4a" compoundref="test__hex2b64_8c" startline="225" endline="233">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1af4cd584df4ce82bfdc5ba2c82c4cdccf" compoundref="test__hex2b64_8c" startline="215" endline="223">UTEST</referencedby>
+        <referencedby refid="test__hex2b64_8c_1a1182413d734d93fbd52a933080e2d8cf" compoundref="test__hex2b64_8c" startline="205" endline="213">UTEST</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1af8dbb048976d5cbccf8c9e41b3fcee10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(stream, hello_world_plain)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>stream</type>
+        </param>
+        <param>
+          <type>hello_world_plain</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="56" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="56" bodyend="62"/>
+        <references refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" compoundref="utest_8h" startline="839">ASSERT_EQ</references>
+        <references refid="utest_8h_1a0132f0c6a5822036440483818727ae26" compoundref="utest_8h" startline="938">ASSERT_STREQ</references>
+        <references refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" compoundref="test__hex2b64_8c" startline="14" endline="38">convert_hex_string</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1acf57bbb77d08db9017e1fa3a5bdbfef5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(stream, ignores_whitespace)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>stream</type>
+        </param>
+        <param>
+          <type>ignores_whitespace</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="64" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="64" bodyend="70"/>
+        <references refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" compoundref="utest_8h" startline="839">ASSERT_EQ</references>
+        <references refid="utest_8h_1a0132f0c6a5822036440483818727ae26" compoundref="utest_8h" startline="938">ASSERT_STREQ</references>
+        <references refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" compoundref="test__hex2b64_8c" startline="14" endline="38">convert_hex_string</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1aa12ffbf5e6132216a64d92259aab1292" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(stream, mixed_case_hex)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>stream</type>
+        </param>
+        <param>
+          <type>mixed_case_hex</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="73" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="73" bodyend="78"/>
+        <references refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" compoundref="utest_8h" startline="839">ASSERT_EQ</references>
+        <references refid="utest_8h_1a0132f0c6a5822036440483818727ae26" compoundref="utest_8h" startline="938">ASSERT_STREQ</references>
+        <references refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" compoundref="test__hex2b64_8c" startline="14" endline="38">convert_hex_string</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1af348845c7be6ba5a20285759248898d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(stream_edge, empty_input)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>stream_edge</type>
+        </param>
+        <param>
+          <type>empty_input</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="83" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="83" bodyend="88"/>
+        <references refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" compoundref="utest_8h" startline="839">ASSERT_EQ</references>
+        <references refid="utest_8h_1a0132f0c6a5822036440483818727ae26" compoundref="utest_8h" startline="938">ASSERT_STREQ</references>
+        <references refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" compoundref="test__hex2b64_8c" startline="14" endline="38">convert_hex_string</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1aa1f20b59bafcaf3f7f8eb39bf1303e02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(stream_edge, whitespace_only)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>stream_edge</type>
+        </param>
+        <param>
+          <type>whitespace_only</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="91" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="91" bodyend="96"/>
+        <references refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" compoundref="utest_8h" startline="839">ASSERT_EQ</references>
+        <references refid="utest_8h_1a0132f0c6a5822036440483818727ae26" compoundref="utest_8h" startline="938">ASSERT_STREQ</references>
+        <references refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" compoundref="test__hex2b64_8c" startline="14" endline="38">convert_hex_string</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1a4fe99bdc1efe6c5827cc54f782b46003" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(stream_edge, single_byte)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>stream_edge</type>
+        </param>
+        <param>
+          <type>single_byte</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="99" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="99" bodyend="104"/>
+        <references refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" compoundref="utest_8h" startline="839">ASSERT_EQ</references>
+        <references refid="utest_8h_1a0132f0c6a5822036440483818727ae26" compoundref="utest_8h" startline="938">ASSERT_STREQ</references>
+        <references refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" compoundref="test__hex2b64_8c" startline="14" endline="38">convert_hex_string</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1af2bb95c9017d4478a8939eaeeb5c1f53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(stream_edge, two_bytes)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>stream_edge</type>
+        </param>
+        <param>
+          <type>two_bytes</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="107" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="107" bodyend="112"/>
+        <references refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" compoundref="utest_8h" startline="839">ASSERT_EQ</references>
+        <references refid="utest_8h_1a0132f0c6a5822036440483818727ae26" compoundref="utest_8h" startline="938">ASSERT_STREQ</references>
+        <references refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" compoundref="test__hex2b64_8c" startline="14" endline="38">convert_hex_string</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1a226b9e8a57bc57a4e7ec90516a974905" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(stream_edge, three_bytes)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>stream_edge</type>
+        </param>
+        <param>
+          <type>three_bytes</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="115" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="115" bodyend="120"/>
+        <references refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" compoundref="utest_8h" startline="839">ASSERT_EQ</references>
+        <references refid="utest_8h_1a0132f0c6a5822036440483818727ae26" compoundref="utest_8h" startline="938">ASSERT_STREQ</references>
+        <references refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" compoundref="test__hex2b64_8c" startline="14" endline="38">convert_hex_string</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1a251bc0fd63e0c3fbfd5b101fcbfe9dcc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(stream_edge, odd_number_of_digits_is_error)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>stream_edge</type>
+        </param>
+        <param>
+          <type>odd_number_of_digits_is_error</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="123" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="123" bodyend="127"/>
+        <references refid="utest_8h_1a35a07906ef961c3a6d9c5639c798fad5" compoundref="utest_8h" startline="844">ASSERT_NE</references>
+        <references refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" compoundref="test__hex2b64_8c" startline="14" endline="38">convert_hex_string</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1abc6162c4396a8161534925c186497b64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(stream_edge, invalid_char_in_middle)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>stream_edge</type>
+        </param>
+        <param>
+          <type>invalid_char_in_middle</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="130" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="130" bodyend="134"/>
+        <references refid="utest_8h_1a35a07906ef961c3a6d9c5639c798fad5" compoundref="utest_8h" startline="844">ASSERT_NE</references>
+        <references refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" compoundref="test__hex2b64_8c" startline="14" endline="38">convert_hex_string</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1a239c3536ec68961c5ccd0ebe8ff22c5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(stream_edge, invalid_first_char)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>stream_edge</type>
+        </param>
+        <param>
+          <type>invalid_first_char</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="137" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="137" bodyend="141"/>
+        <references refid="utest_8h_1a35a07906ef961c3a6d9c5639c798fad5" compoundref="utest_8h" startline="844">ASSERT_NE</references>
+        <references refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" compoundref="test__hex2b64_8c" startline="14" endline="38">convert_hex_string</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1a07d4baf0f5b27b2c16f884732e3beaa4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(stream_edge, many_bytes_sanity)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>stream_edge</type>
+        </param>
+        <param>
+          <type>many_bytes_sanity</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="144" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="144" bodyend="163"/>
+        <references refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" compoundref="utest_8h" startline="839">ASSERT_EQ</references>
+        <references refid="utest_8h_1a0db28390db46a851a240aec50b0c3bed" compoundref="utest_8h" startline="859">ASSERT_GT</references>
+        <references refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" compoundref="test__hex2b64_8c" startline="14" endline="38">convert_hex_string</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1ad6f560ee5b7d38b167e7d1bca6a6e2ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(buffer, hello_world_plain)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>buffer</type>
+        </param>
+        <param>
+          <type>hello_world_plain</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="167" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="167" bodyend="178"/>
+        <references refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" compoundref="utest_8h" startline="839">ASSERT_EQ</references>
+        <references refid="utest_8h_1a0132f0c6a5822036440483818727ae26" compoundref="utest_8h" startline="938">ASSERT_STREQ</references>
+        <references refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" compoundref="test__hex2b64_8c" startline="43" endline="52">convert_hex_buffer</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1ab9e29fee76486b9927f17c271035f4b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(buffer, ignores_whitespace)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>buffer</type>
+        </param>
+        <param>
+          <type>ignores_whitespace</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="180" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="180" bodyend="190"/>
+        <references refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" compoundref="utest_8h" startline="839">ASSERT_EQ</references>
+        <references refid="utest_8h_1a0132f0c6a5822036440483818727ae26" compoundref="utest_8h" startline="938">ASSERT_STREQ</references>
+        <references refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" compoundref="test__hex2b64_8c" startline="43" endline="52">convert_hex_buffer</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1a50cc55be417b255feff74a99f1c8746a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(buffer, empty_input)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>buffer</type>
+        </param>
+        <param>
+          <type>empty_input</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="192" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="192" bodyend="203"/>
+        <references refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" compoundref="utest_8h" startline="839">ASSERT_EQ</references>
+        <references refid="utest_8h_1a0132f0c6a5822036440483818727ae26" compoundref="utest_8h" startline="938">ASSERT_STREQ</references>
+        <references refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" compoundref="test__hex2b64_8c" startline="43" endline="52">convert_hex_buffer</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1a1182413d734d93fbd52a933080e2d8cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(buffer_edge, odd_digits_error)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>buffer_edge</type>
+        </param>
+        <param>
+          <type>odd_digits_error</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="205" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="205" bodyend="213"/>
+        <references refid="utest_8h_1a35a07906ef961c3a6d9c5639c798fad5" compoundref="utest_8h" startline="844">ASSERT_NE</references>
+        <references refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" compoundref="test__hex2b64_8c" startline="43" endline="52">convert_hex_buffer</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1af4cd584df4ce82bfdc5ba2c82c4cdccf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(buffer_edge, invalid_character)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>buffer_edge</type>
+        </param>
+        <param>
+          <type>invalid_character</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="215" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="215" bodyend="223"/>
+        <references refid="utest_8h_1a35a07906ef961c3a6d9c5639c798fad5" compoundref="utest_8h" startline="844">ASSERT_NE</references>
+        <references refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" compoundref="test__hex2b64_8c" startline="43" endline="52">convert_hex_buffer</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1afb27bd98674fda637748aeb58b390e4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST</definition>
+        <argsstring>(buffer_edge, insufficient_output_capacity)</argsstring>
+        <name>UTEST</name>
+        <param>
+          <type>buffer_edge</type>
+        </param>
+        <param>
+          <type>insufficient_output_capacity</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="225" column="1" bodyfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" bodystart="225" bodyend="233"/>
+        <references refid="utest_8h_1a35a07906ef961c3a6d9c5639c798fad5" compoundref="utest_8h" startline="844">ASSERT_NE</references>
+        <references refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" compoundref="test__hex2b64_8c" startline="43" endline="52">convert_hex_buffer</references>
+      </memberdef>
+      <memberdef kind="function" id="test__hex2b64_8c_1a6ffcf5d3d2c42e0e357d5a5a4da98947" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTEST_MAIN</definition>
+        <argsstring>()</argsstring>
+        <name>UTEST_MAIN</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" line="236" column="1" declfile="/home/jas/code/cryptopals_c/tests/test_hex2b64.c" declline="236" declcolumn="1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Unit<sp/>tests<sp/>for<sp/>the<sp/>hex2b64<sp/>conversion<sp/>helpers.</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hex2b64_8h" kindref="compound">hex2b64.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="utest_8h" kindref="compound">utest.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>Run<sp/>hex2b64_stream()<sp/>over<sp/>an<sp/>in-memory<sp/>string<sp/>and<sp/>capture<sp/>its<sp/>output<sp/>in<sp/>out.</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" kindref="member">convert_hex_string</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*hex,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*out,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>out_cap)<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>FILE<sp/>*in<sp/>=<sp/>tmpfile();</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>FILE<sp/>*outf<sp/>=<sp/>tmpfile();</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!in<sp/>||<sp/>!outf)<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(in)<sp/>fclose(in);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(outf)<sp/>fclose(outf);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-1;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>fputs(hex,<sp/>in);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>rewind(in);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="hex2b64_8h_1ac4d5fb00f18155944f6038d75dc86884" kindref="member">hex2b64_stream</ref>(in,<sp/>outf);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>fflush(outf);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>rewind(outf);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n<sp/>=<sp/>fread(out,<sp/>1,<sp/>out_cap<sp/>-<sp/>1,<sp/>outf);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>out[n]<sp/>=<sp/></highlight><highlight class="charliteral">&apos;\0&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>fclose(in);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>fclose(outf);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>rc;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*<sp/>Convenience<sp/>wrapper<sp/>around<sp/>hex2b64_buffer()<sp/>for<sp/>string<sp/>literals.</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" kindref="member">convert_hex_buffer</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*hex,</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*out,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>out_cap,</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>*out_len)<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="hex2b64_8h_1a05acf5abc39b18e4f74da2c2a2a7415d" kindref="member">hex2b64_buffer</ref>((</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)hex,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strlen(hex),</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out_cap,</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out_len);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>===<sp/>Integration<sp/>tests<sp/>for<sp/>hex2b64_stream<sp/>(normal<sp/>cases)<sp/>===<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56" refid="test__hex2b64_8c_1af8dbb048976d5cbccf8c9e41b3fcee10" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(stream,<sp/>hello_world_plain)<sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[128];</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" kindref="member">convert_hex_string</ref>(</highlight><highlight class="stringliteral">&quot;48656c6c6f20776f726c64&quot;</highlight><highlight class="normal">,<sp/>out,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out));</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>&quot;Hello<sp/>world&quot;<sp/>in<sp/>Base64<sp/>plus<sp/>newline<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a0132f0c6a5822036440483818727ae26" kindref="member">ASSERT_STREQ</ref>(</highlight><highlight class="stringliteral">&quot;SGVsbG8gd29ybGQ=\n&quot;</highlight><highlight class="normal">,<sp/>out);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="test__hex2b64_8c_1acf57bbb77d08db9017e1fa3a5bdbfef5" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(stream,<sp/>ignores_whitespace)<sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[128];</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" kindref="member">convert_hex_string</ref>(</highlight><highlight class="stringliteral">&quot;48<sp/>65<sp/>6c<sp/>6c<sp/>6f<sp/>20<sp/>77<sp/>6f<sp/>72<sp/>6c<sp/>64\n&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out));</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a0132f0c6a5822036440483818727ae26" kindref="member">ASSERT_STREQ</ref>(</highlight><highlight class="stringliteral">&quot;SGVsbG8gd29ybGQ=\n&quot;</highlight><highlight class="normal">,<sp/>out);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Mixed<sp/>upper/lowercase<sp/>hex<sp/>for<sp/>same<sp/>&quot;Hello<sp/>world&quot;.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="test__hex2b64_8c_1aa12ffbf5e6132216a64d92259aab1292" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(stream,<sp/>mixed_case_hex)<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[128];</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" kindref="member">convert_hex_string</ref>(</highlight><highlight class="stringliteral">&quot;48656C6c6F20776F726C64&quot;</highlight><highlight class="normal">,<sp/>out,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out));</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a0132f0c6a5822036440483818727ae26" kindref="member">ASSERT_STREQ</ref>(</highlight><highlight class="stringliteral">&quot;SGVsbG8gd29ybGQ=\n&quot;</highlight><highlight class="normal">,<sp/>out);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>===<sp/>Integration<sp/>tests:<sp/>edge<sp/>cases<sp/>===<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Empty<sp/>input:<sp/>should<sp/>just<sp/>produce<sp/>a<sp/>newline.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="test__hex2b64_8c_1af348845c7be6ba5a20285759248898d2" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(stream_edge,<sp/>empty_input)<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[128];</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" kindref="member">convert_hex_string</ref>(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">,<sp/>out,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out));</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a0132f0c6a5822036440483818727ae26" kindref="member">ASSERT_STREQ</ref>(</highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">,<sp/>out);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Only<sp/>whitespace:<sp/>also<sp/>just<sp/>newline.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91" refid="test__hex2b64_8c_1aa1f20b59bafcaf3f7f8eb39bf1303e02" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(stream_edge,<sp/>whitespace_only)<sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[128];</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" kindref="member">convert_hex_string</ref>(</highlight><highlight class="stringliteral">&quot;<sp/><sp/><sp/>\n\t<sp/><sp/>&quot;</highlight><highlight class="normal">,<sp/>out,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out));</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a0132f0c6a5822036440483818727ae26" kindref="member">ASSERT_STREQ</ref>(</highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">,<sp/>out);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Single<sp/>byte<sp/>(2<sp/>hex<sp/>digits)<sp/>-&gt;<sp/>1-byte<sp/>Base64<sp/>with<sp/>padding.<sp/>&quot;M&quot;<sp/>-&gt;<sp/>&quot;TQ==&quot;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99" refid="test__hex2b64_8c_1a4fe99bdc1efe6c5827cc54f782b46003" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(stream_edge,<sp/>single_byte)<sp/>{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[128];</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" kindref="member">convert_hex_string</ref>(</highlight><highlight class="stringliteral">&quot;4d&quot;</highlight><highlight class="normal">,<sp/>out,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out));<sp/></highlight><highlight class="comment">/*<sp/>&apos;M&apos;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a0132f0c6a5822036440483818727ae26" kindref="member">ASSERT_STREQ</ref>(</highlight><highlight class="stringliteral">&quot;TQ==\n&quot;</highlight><highlight class="normal">,<sp/>out);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Two<sp/>bytes<sp/>(4<sp/>hex<sp/>digits)<sp/>-&gt;<sp/>2-byte<sp/>Base64<sp/>+<sp/>&apos;=&apos;<sp/>padding.<sp/>&quot;Ma&quot;<sp/>-&gt;<sp/>&quot;TWE=&quot;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107" refid="test__hex2b64_8c_1af2bb95c9017d4478a8939eaeeb5c1f53" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(stream_edge,<sp/>two_bytes)<sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[128];</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" kindref="member">convert_hex_string</ref>(</highlight><highlight class="stringliteral">&quot;4d61&quot;</highlight><highlight class="normal">,<sp/>out,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out));<sp/></highlight><highlight class="comment">/*<sp/>&quot;Ma&quot;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a0132f0c6a5822036440483818727ae26" kindref="member">ASSERT_STREQ</ref>(</highlight><highlight class="stringliteral">&quot;TWE=\n&quot;</highlight><highlight class="normal">,<sp/>out);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Three<sp/>bytes<sp/>(6<sp/>hex<sp/>digits)<sp/>-&gt;<sp/>3-byte<sp/>Base64,<sp/>no<sp/>padding.<sp/>&quot;Man&quot;<sp/>-&gt;<sp/>&quot;TWFu&quot;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115" refid="test__hex2b64_8c_1a226b9e8a57bc57a4e7ec90516a974905" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(stream_edge,<sp/>three_bytes)<sp/>{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[128];</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" kindref="member">convert_hex_string</ref>(</highlight><highlight class="stringliteral">&quot;4d616e&quot;</highlight><highlight class="normal">,<sp/>out,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out));<sp/></highlight><highlight class="comment">/*<sp/>&quot;Man&quot;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a0132f0c6a5822036440483818727ae26" kindref="member">ASSERT_STREQ</ref>(</highlight><highlight class="stringliteral">&quot;TWFu\n&quot;</highlight><highlight class="normal">,<sp/>out);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Odd<sp/>number<sp/>of<sp/>hex<sp/>digits:<sp/>error.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123" refid="test__hex2b64_8c_1a251bc0fd63e0c3fbfd5b101fcbfe9dcc" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(stream_edge,<sp/>odd_number_of_digits_is_error)<sp/>{</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[128];</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" kindref="member">convert_hex_string</ref>(</highlight><highlight class="stringliteral">&quot;48656c6c6f7&quot;</highlight><highlight class="normal">,<sp/>out,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out));</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a35a07906ef961c3a6d9c5639c798fad5" kindref="member">ASSERT_NE</ref>(0,<sp/>rc);<sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Should<sp/>fail<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Invalid<sp/>hex<sp/>character<sp/>in<sp/>the<sp/>middle:<sp/>error.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="130" refid="test__hex2b64_8c_1abc6162c4396a8161534925c186497b64" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(stream_edge,<sp/>invalid_char_in_middle)<sp/>{</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[128];</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" kindref="member">convert_hex_string</ref>(</highlight><highlight class="stringliteral">&quot;48656x6c6f&quot;</highlight><highlight class="normal">,<sp/>out,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out));</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a35a07906ef961c3a6d9c5639c798fad5" kindref="member">ASSERT_NE</ref>(0,<sp/>rc);<sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Should<sp/>fail<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Invalid<sp/>hex<sp/>character<sp/>as<sp/>first<sp/>non-whitespace:<sp/>error.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137" refid="test__hex2b64_8c_1a239c3536ec68961c5ccd0ebe8ff22c5f" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(stream_edge,<sp/>invalid_first_char)<sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[128];</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" kindref="member">convert_hex_string</ref>(</highlight><highlight class="stringliteral">&quot;z8656c6c6f&quot;</highlight><highlight class="normal">,<sp/>out,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out));</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a35a07906ef961c3a6d9c5639c798fad5" kindref="member">ASSERT_NE</ref>(0,<sp/>rc);<sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Should<sp/>fail<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Large-ish<sp/>input:<sp/>many<sp/>&apos;A&apos;<sp/>bytes<sp/>(0x41)<sp/>–<sp/>just<sp/>sanity<sp/>check<sp/>result<sp/>shape.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144" refid="test__hex2b64_8c_1a07d4baf0f5b27b2c16f884732e3beaa4" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(stream_edge,<sp/>many_bytes_sanity)<sp/>{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>hex[1024];</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[2048];</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>100<sp/>bytes<sp/>of<sp/>&apos;A&apos;<sp/>(0x41<sp/>=&gt;<sp/>&quot;41&quot;<sp/>in<sp/>hex).<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>100;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hex[2<sp/>*<sp/>i]<sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="charliteral">&apos;4&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hex[2<sp/>*<sp/>i<sp/>+<sp/>1]<sp/>=<sp/></highlight><highlight class="charliteral">&apos;1&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/>hex[2<sp/>*<sp/>100]<sp/>=<sp/></highlight><highlight class="charliteral">&apos;\0&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a70241bb264fd7b03fdc9a4002653706b" kindref="member">convert_hex_string</ref>(hex,<sp/>out,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out));</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Just<sp/>basic<sp/>sanity:<sp/>output<sp/>must<sp/>end<sp/>with<sp/>&apos;\n&apos;<sp/>and<sp/>be<sp/>non-empty.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len<sp/>=<sp/>strlen(out);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a0db28390db46a851a240aec50b0c3bed" kindref="member">ASSERT_GT</ref>(len,<sp/>1u);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(</highlight><highlight class="charliteral">&apos;\n&apos;</highlight><highlight class="normal">,<sp/>out[len<sp/>-<sp/>1]);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>===<sp/>Tests<sp/>for<sp/>hex2b64_buffer<sp/>===<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167" refid="test__hex2b64_8c_1ad6f560ee5b7d38b167e7d1bca6a6e2ed" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(buffer,<sp/>hello_world_plain)<sp/>{</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[128];</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>out_len<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" kindref="member">convert_hex_buffer</ref>(</highlight><highlight class="stringliteral">&quot;48656c6c6f20776f726c64&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out,</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out),</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;out_len);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(strlen(</highlight><highlight class="stringliteral">&quot;SGVsbG8gd29ybGQ=\n&quot;</highlight><highlight class="normal">),<sp/>out_len);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>out[out_len]<sp/>=<sp/></highlight><highlight class="charliteral">&apos;\0&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a0132f0c6a5822036440483818727ae26" kindref="member">ASSERT_STREQ</ref>(</highlight><highlight class="stringliteral">&quot;SGVsbG8gd29ybGQ=\n&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)out);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180" refid="test__hex2b64_8c_1ab9e29fee76486b9927f17c271035f4b6" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(buffer,<sp/>ignores_whitespace)<sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[128];</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>out_len<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" kindref="member">convert_hex_buffer</ref>(</highlight><highlight class="stringliteral">&quot;48<sp/>65<sp/>6c<sp/>6c<sp/>6f&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out,</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out),</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;out_len);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/>out[out_len]<sp/>=<sp/></highlight><highlight class="charliteral">&apos;\0&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a0132f0c6a5822036440483818727ae26" kindref="member">ASSERT_STREQ</ref>(</highlight><highlight class="stringliteral">&quot;SGVsbG8=\n&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)out);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192" refid="test__hex2b64_8c_1a50cc55be417b255feff74a99f1c8746a" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(buffer,<sp/>empty_input)<sp/>{</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[8];</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>out_len<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" kindref="member">convert_hex_buffer</ref>(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out,</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out),</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;out_len);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1ac6c92d3e1149a6fea5f49cd3f44118fe" kindref="member">ASSERT_EQ</ref>(1u,<sp/>out_len);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/>out[out_len]<sp/>=<sp/></highlight><highlight class="charliteral">&apos;\0&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a0132f0c6a5822036440483818727ae26" kindref="member">ASSERT_STREQ</ref>(</highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)out);</highlight></codeline>
+<codeline lineno="203"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205" refid="test__hex2b64_8c_1a1182413d734d93fbd52a933080e2d8cf" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(buffer_edge,<sp/>odd_digits_error)<sp/>{</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[16];</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>out_len<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" kindref="member">convert_hex_buffer</ref>(</highlight><highlight class="stringliteral">&quot;123&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out,</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out),</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;out_len);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a35a07906ef961c3a6d9c5639c798fad5" kindref="member">ASSERT_NE</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="215" refid="test__hex2b64_8c_1af4cd584df4ce82bfdc5ba2c82c4cdccf" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(buffer_edge,<sp/>invalid_character)<sp/>{</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[16];</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>out_len<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" kindref="member">convert_hex_buffer</ref>(</highlight><highlight class="stringliteral">&quot;48xx&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out,</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out),</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;out_len);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a35a07906ef961c3a6d9c5639c798fad5" kindref="member">ASSERT_NE</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="223"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight></codeline>
+<codeline lineno="225" refid="test__hex2b64_8c_1afb27bd98674fda637748aeb58b390e4a" refkind="member"><highlight class="normal"><ref refid="utest_8h_1a6796422b7117cee77de4719b028ee76f" kindref="member">UTEST</ref>(buffer_edge,<sp/>insufficient_output_capacity)<sp/>{</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>out[4];</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>out_len<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/><ref refid="test__hex2b64_8c_1a15e8ccc4bde98110c8c4ecf984b85965" kindref="member">convert_hex_buffer</ref>(</highlight><highlight class="stringliteral">&quot;4d&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out,</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(out),</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;out_len);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="utest_8h_1a35a07906ef961c3a6d9c5639c798fad5" kindref="member">ASSERT_NE</ref>(0,<sp/>rc);</highlight></codeline>
+<codeline lineno="233"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Let<sp/>utest.h<sp/>provide<sp/>main().<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="236" refid="test__hex2b64_8c_1a6ffcf5d3d2c42e0e357d5a5a4da98947" refkind="member"><highlight class="normal"><ref refid="test__hex2b64_8c_1a6ffcf5d3d2c42e0e357d5a5a4da98947" kindref="member">UTEST_MAIN</ref>();</highlight></codeline>
+    </programlisting>
+    <location file="/home/jas/code/cryptopals_c/tests/test_hex2b64.c"/>
+  </compounddef>
+</doxygen>

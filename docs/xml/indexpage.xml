@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>Cryptopals in C Code</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><anchor id="index_1md__2home_2jas_2code_2cryptopals__c_2README"/> <image type="html" name="https://github.com/heyjdp/cryptopals_c/actions/workflows/ci.yml/badge.svg" alt="CI" inline="yes"></image>
+</para>
+<para>Solve the <bold>Cryptopals Crypto Challenges</bold> using <bold>pure C</bold>. <linebreak/>
+</para>
+<para><itemizedlist>
+<listitem><para>This repository contains my implementations, notes, and explanations for each challenge set, focused on clarity, correctness, and learning modern applied cryptography from first principles.</para>
+</listitem></itemizedlist>
+</para>
+<para>Basically a quiet Saturday and I am in need of a challenge, so I am speedrunning the Cryptopals challenges in C code, just for fun.</para>
+<para><hruler/>
+</para>
+<sect1 id="index_1autotoc_md2">
+<title>Overview</title>
+<para>The <bold>Cryptopals Challenges</bold> are a well-known set of practical cryptography exercises covering topics like:</para>
+<para><itemizedlist>
+<listitem><para>Encoding and decoding <linebreak/>
+</para>
+</listitem><listitem><para>XOR ciphers <linebreak/>
+</para>
+</listitem><listitem><para>Block ciphers (AES) <linebreak/>
+</para>
+</listitem><listitem><para>Padding oracles <linebreak/>
+</para>
+</listitem><listitem><para>CBC, CTR, stream attacks <linebreak/>
+</para>
+</listitem><listitem><para>Diffie–Hellman, RSA, and more <linebreak/>
+</para>
+</listitem></itemizedlist>
+</para>
+<para>This repo is my attempt to solve them <bold>from scratch in C</bold>, without relying on high-level crypto libraries unless the challenge&apos;s intent allows it.</para>
+<para>The goal is to deeply understand how the primitives work internally.</para>
+<para><hruler/>
+</para>
+</sect1>
+<sect1 id="index_1autotoc_md4">
+<title>Requirements</title>
+<para><itemizedlist>
+<listitem><para><bold>C99 or newer</bold></para>
+</listitem><listitem><para><bold>Make</bold></para>
+</listitem><listitem><para><bold>doxygen and pdflatex/texlive environment for docs</bold></para>
+</listitem></itemizedlist>
+</para>
+<para><hruler/>
+</para>
+</sect1>
+<sect1 id="index_1autotoc_md6">
+<title>Building &amp; Running</title>
+<para>Common combinations of the below:</para>
+<para><programlisting filename=".bash"><codeline><highlight class="normal">make<sp/>clean</highlight></codeline>
+<codeline><highlight class="normal">make</highlight></codeline>
+<codeline><highlight class="normal">make<sp/>test</highlight></codeline>
+<codeline><highlight class="normal">make<sp/>docs</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+</sect1>
+<sect1 id="index_1autotoc_md8">
+<title>Security Disclaimer</title>
+<para><itemizedlist>
+<listitem><para>This code is for my own amusement and educational purposes only.</para>
+</listitem><listitem><para>Do not use it in production, security-critical, or cryptographic applications.</para>
+</listitem></itemizedlist>
+</para>
+<para><hruler/>
+</para>
+</sect1>
+<sect1 id="index_1autotoc_md10">
+<title>References</title>
+<para><ulink url="https://cryptopals.com/">Cryptopals Challenges</ulink> </para>
+</sect1>
+    </detaileddescription>
+    <location file="/home/jas/code/cryptopals_c/README.md"/>
+  </compounddef>
+</doxygen>

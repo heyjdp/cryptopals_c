@@ -1,0 +1,97 @@
+/* docs/theme/custom.css - Doxygen HTML theme overrides */
+
+/* Use a modern system font stack */
+body, table, div, p, dl {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Brand colors */
+:root {
+  --brand-primary: #0d6efd;
+  --brand-secondary: #6c757d;
+  --brand-accent: #20c997;
+  --brand-dark: #212529;
+  --brand-background: #f8f9fa;
+}
+
+/* Page background & content area */
+body {
+  background-color: var(--brand-background);
+}
+
+div#top {
+  background: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Project logo and title area */
+#projectname {
+  color: var(--brand-dark);
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+#projectbrief {
+  color: var(--brand-secondary);
+  font-size: 0.9rem;
+}
+
+/* Navigation tree */
+#nav-tree {
+  background: white;
+}
+
+#nav-tree .selected {
+  background: rgba(13, 110, 253, 0.12);
+}
+
+/* Links */
+a,
+a:visited {
+  color: var(--brand-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+  color: var(--brand-dark);
+  font-weight: 600;
+}
+
+/* Code blocks */
+pre, code {
+  font-family: "JetBrains Mono", "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 0.9rem;
+}
+
+pre {
+  background: #212529;
+  color: #f8f9fa;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+/* Tables */
+table.memberdecls {
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+table.memberdecls thead {
+  background: rgba(13, 110, 253, 0.06);
+}
+
+/* Small card-like look for main content */
+div.contents {
+  background: white;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}

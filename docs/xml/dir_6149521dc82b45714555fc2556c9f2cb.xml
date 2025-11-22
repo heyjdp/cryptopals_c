@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_6149521dc82b45714555fc2556c9f2cb" kind="dir">
+    <compoundname>cryptopals</compoundname>
+    <innerfile refid="set__1__challenge__1_8c">set_1_challenge_1.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jas/code/cryptopals_c/cryptopals/"/>
+  </compounddef>
+</doxygen>

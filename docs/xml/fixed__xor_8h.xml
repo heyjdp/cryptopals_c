@@ -1,0 +1,294 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="fixed__xor_8h" kind="file" language="C++">
+    <compoundname>fixed_xor.h</compoundname>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includedby refid="fixed__xor_8c" local="yes">fixed_xor.c</includedby>
+    <includedby refid="fixed__xor__main_8c" local="yes">fixed_xor_main.c</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>fixed_xor.h</label>
+        <link refid="fixed__xor_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stddef.h</label>
+      </node>
+      <node id="3">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>fixed_xor.h</label>
+        <link refid="fixed__xor_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fixed_xor.c</label>
+        <link refid="fixed__xor_8c"/>
+      </node>
+      <node id="3">
+        <label>fixed_xor_main.c</label>
+        <link refid="fixed__xor__main_8c"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6d" prot="public" static="no" strong="no">
+        <type></type>
+        <name>fixed_xor_status</name>
+        <enumvalue id="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da62b5a3e4939e730e99e13fedce37741d" prot="public">
+          <name>FIXED_XOR_OK</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Operation completed successfully. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6dae80bd1b74bcbf68650ec92fd65618958" prot="public">
+          <name>FIXED_XOR_ERR_ARGS</name>
+          <initializer>= -1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Invalid arguments were supplied. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da3ae335e569bb25d12ba7003cc8430f6a" prot="public">
+          <name>FIXED_XOR_ERR_IO</name>
+          <initializer>= -2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>I/O failure while reading or writing. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6dade391554e7d4df04232b915d1cbe719c" prot="public">
+          <name>FIXED_XOR_ERR_ODD_INPUT</name>
+          <initializer>= -3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Stream input contained an odd byte count. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da859f898081f550c36a8e821019ec531a" prot="public">
+          <name>FIXED_XOR_ERR_OOM</name>
+          <initializer>= -4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Memory allocation failed. </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Status codes describing the outcome of fixed XOR operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/header/fixed_xor.h" line="15" column="1" bodyfile="/home/jas/code/cryptopals_c/header/fixed_xor.h" bodystart="15" bodyend="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="fixed__xor_8h_1ab23437e524ba132f67eaab28f6f87175" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6d" kindref="member">fixed_xor_status</ref></type>
+        <definition>fixed_xor_status fixed_xor_buffers</definition>
+        <argsstring>(const unsigned char *lhs, const unsigned char *rhs, unsigned char *out, size_t len)</argsstring>
+        <name>fixed_xor_buffers</name>
+        <param>
+          <type>const unsigned char *</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const unsigned char *</type>
+          <declname>rhs</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+<para>XOR two buffers of equal length into an output buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the left-hand buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the right-hand buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Destination buffer that receives lhs ^ rhs. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bytes to process. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>FIXED_XOR_OK on success or an error status on failure.</para>
+</simplesect>
+XOR two buffers of equal length into an output buffer. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/header/fixed_xor.h" line="32" column="18" bodyfile="/home/jas/code/cryptopals_c/lib/fixed_xor.c" bodystart="18" bodyend="32" declfile="/home/jas/code/cryptopals_c/header/fixed_xor.h" declline="32" declcolumn="18"/>
+        <references refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6dae80bd1b74bcbf68650ec92fd65618958" compoundref="fixed__xor_8h" startline="17">FIXED_XOR_ERR_ARGS</references>
+        <references refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da62b5a3e4939e730e99e13fedce37741d" compoundref="fixed__xor_8h" startline="16">FIXED_XOR_OK</references>
+        <referencedby refid="fixed__xor_8h_1a1719a7f89364714ae3b944a4772f8eb5" compoundref="fixed__xor_8c" startline="68" endline="122">fixed_xor_stream</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="fixed__xor_8h_1a1719a7f89364714ae3b944a4772f8eb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6d" kindref="member">fixed_xor_status</ref></type>
+        <definition>fixed_xor_status fixed_xor_stream</definition>
+        <argsstring>(FILE *in, FILE *out)</argsstring>
+        <name>fixed_xor_stream</name>
+        <param>
+          <type>FILE *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>XOR two half-length buffers read sequentially from a stream. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The input stream is expected to contain two equally sized buffers back to back. The result is written to <computeroutput>out</computeroutput>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stream containing the concatenated buffers. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stream that receives XOR output. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>FIXED_XOR_OK on success or an error status on failure.</para>
+</simplesect>
+XOR two half-length buffers read sequentially from a stream. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/header/fixed_xor.h" line="47" column="18" bodyfile="/home/jas/code/cryptopals_c/lib/fixed_xor.c" bodystart="68" bodyend="122" declfile="/home/jas/code/cryptopals_c/header/fixed_xor.h" declline="47" declcolumn="18"/>
+        <references refid="fixed__xor_8c_1ab23437e524ba132f67eaab28f6f87175" compoundref="fixed__xor_8c" startline="18" endline="32">fixed_xor_buffers</references>
+        <references refid="fixed__xor_8c_1a7e6b73fe9164bf20b4729a23cb8b1d02" compoundref="fixed__xor_8c" startline="15">FIXED_XOR_CHUNK</references>
+        <references refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6dae80bd1b74bcbf68650ec92fd65618958" compoundref="fixed__xor_8h" startline="17">FIXED_XOR_ERR_ARGS</references>
+        <references refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da3ae335e569bb25d12ba7003cc8430f6a" compoundref="fixed__xor_8h" startline="18">FIXED_XOR_ERR_IO</references>
+        <references refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6dade391554e7d4df04232b915d1cbe719c" compoundref="fixed__xor_8h" startline="19">FIXED_XOR_ERR_ODD_INPUT</references>
+        <references refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da859f898081f550c36a8e821019ec531a" compoundref="fixed__xor_8h" startline="20">FIXED_XOR_ERR_OOM</references>
+        <references refid="fixed__xor_8c_1a9b4d1e52c05be8cbc19c07289624b536" compoundref="fixed__xor_8c" startline="42" endline="65">fixed_xor_grow</references>
+        <references refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da62b5a3e4939e730e99e13fedce37741d" compoundref="fixed__xor_8h" startline="16">FIXED_XOR_OK</references>
+        <referencedby refid="fixed__xor__main_8c_1a840291bc02cba5474a4cb46a9b9566fe" compoundref="fixed__xor__main_8c" startline="16" endline="24">main</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="fixed__xor_8h_1afd02583938bcd7d4f11baa18e23279d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * fixed_xor_status_string</definition>
+        <argsstring>(fixed_xor_status status)</argsstring>
+        <name>fixed_xor_status_string</name>
+        <param>
+          <type><ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6d" kindref="member">fixed_xor_status</ref></type>
+          <declname>status</declname>
+        </param>
+        <briefdescription>
+<para>Convert a fixed_xor_status value into a human-readable string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Status code to describe. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to a static string literal.</para>
+</simplesect>
+Convert a fixed_xor_status value into a human-readable string. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jas/code/cryptopals_c/header/fixed_xor.h" line="55" column="12" bodyfile="/home/jas/code/cryptopals_c/lib/fixed_xor.c" bodystart="125" bodyend="140" declfile="/home/jas/code/cryptopals_c/header/fixed_xor.h" declline="55" declcolumn="12"/>
+        <references refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6dae80bd1b74bcbf68650ec92fd65618958" compoundref="fixed__xor_8h" startline="17">FIXED_XOR_ERR_ARGS</references>
+        <references refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da3ae335e569bb25d12ba7003cc8430f6a" compoundref="fixed__xor_8h" startline="18">FIXED_XOR_ERR_IO</references>
+        <references refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6dade391554e7d4df04232b915d1cbe719c" compoundref="fixed__xor_8h" startline="19">FIXED_XOR_ERR_ODD_INPUT</references>
+        <references refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da859f898081f550c36a8e821019ec531a" compoundref="fixed__xor_8h" startline="20">FIXED_XOR_ERR_OOM</references>
+        <references refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da62b5a3e4939e730e99e13fedce37741d" compoundref="fixed__xor_8h" startline="16">FIXED_XOR_OK</references>
+        <referencedby refid="fixed__xor__main_8c_1a840291bc02cba5474a4cb46a9b9566fe" compoundref="fixed__xor__main_8c" startline="16" endline="24">main</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Public interface for XORing two equally sized buffers. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>FIXED_XOR_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FIXED_XOR_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6d" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="16" refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da62b5a3e4939e730e99e13fedce37741d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da62b5a3e4939e730e99e13fedce37741d" kindref="member">FIXED_XOR_OK</ref><sp/>=<sp/>0,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="17" refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6dae80bd1b74bcbf68650ec92fd65618958" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6dae80bd1b74bcbf68650ec92fd65618958" kindref="member">FIXED_XOR_ERR_ARGS</ref><sp/>=<sp/>-1,<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="18" refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da3ae335e569bb25d12ba7003cc8430f6a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da3ae335e569bb25d12ba7003cc8430f6a" kindref="member">FIXED_XOR_ERR_IO</ref><sp/>=<sp/>-2,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="19" refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6dade391554e7d4df04232b915d1cbe719c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6dade391554e7d4df04232b915d1cbe719c" kindref="member">FIXED_XOR_ERR_ODD_INPUT</ref><sp/>=<sp/>-3,<sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da859f898081f550c36a8e821019ec531a" kindref="member">FIXED_XOR_ERR_OOM</ref><sp/>=<sp/>-4<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="21" refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6da859f898081f550c36a8e821019ec531a" refkind="member"><highlight class="normal">}<sp/><ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6d" kindref="member">fixed_xor_status</ref>;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6d" kindref="member">fixed_xor_status</ref><sp/><ref refid="fixed__xor_8h_1ab23437e524ba132f67eaab28f6f87175" kindref="member">fixed_xor_buffers</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*lhs,</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*rhs,</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*out,</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6d" kindref="member">fixed_xor_status</ref><sp/><ref refid="fixed__xor_8h_1a1719a7f89364714ae3b944a4772f8eb5" kindref="member">fixed_xor_stream</ref>(FILE<sp/>*in,<sp/>FILE<sp/>*out);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="fixed__xor_8h_1afd02583938bcd7d4f11baa18e23279d4" kindref="member">fixed_xor_status_string</ref>(<ref refid="fixed__xor_8h_1abfe0b71ca480a0d81de8980c6d0a7a6d" kindref="member">fixed_xor_status</ref><sp/>status);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>FIXED_XOR_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jas/code/cryptopals_c/header/fixed_xor.h"/>
+  </compounddef>
+</doxygen>

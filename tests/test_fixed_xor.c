@@ -1,6 +1,5 @@
-/**
- * @file test_fixed_xor.c
- * @brief Unit tests for fixed XOR helpers.
+/*
+ * Unit tests for fixed XOR helpers.
  */
 
 #include <stdio.h>

@@ -1,0 +1,118 @@
+% custom.sty - Branding & layout tweaks for Doxygen LaTeX output
+
+% This file is loaded by Doxygen after its own default packages.
+% Feel free to add/remove packages as your LaTeX toolchain allows.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{custom}[2025/01/01 Custom Doxygen styling]
+
+% -------------------------------------------------------
+% Packages
+% -------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+% hyperref is loaded by Doxygen; we just tweak its settings later.
+
+% -------------------------------------------------------
+% Brand colors
+% -------------------------------------------------------
+% Adjust these to match your brand:
+\definecolor{BrandPrimary}{HTML}{0D6EFD} % blue-ish
+\definecolor{BrandSecondary}{HTML}{6C757D}
+\definecolor{BrandAccent}{HTML}{20C997}
+\definecolor{BrandDark}{HTML}{212529}
+
+% Hyperref colors (defer until hyperref is available)
+\makeatletter
+\AtBeginDocument{%
+  \@ifpackageloaded{hyperref}{%
+    \hypersetup{
+      colorlinks=true,
+      linkcolor=BrandPrimary,
+      urlcolor=BrandPrimary,
+      citecolor=BrandAccent
+    }%
+  }{}%
+}
+\makeatother
+
+% -------------------------------------------------------
+% Fonts & Section Styles
+% -------------------------------------------------------
+% If you want to use system fonts, consider using package 'mathpazo' or 'libertine'.
+% Here we just tweak sizes and colors.
+
+\sectionfont{\color{BrandDark}\normalfont\Large\bfseries}
+\subsectionfont{\color{BrandPrimary}\normalfont\large\bfseries}
+\subsubsectionfont{\color{BrandSecondary}\normalfont\normalsize\bfseries}
+
+% Extra spacing for a more modern look
+\titlespacing*{\section}{0pt}{2.0ex plus 1ex minus 0.5ex}{1.0ex}
+\titlespacing*{\subsection}{0pt}{1.5ex plus 0.75ex minus 0.25ex}{0.75ex}
+
+% -------------------------------------------------------
+% Header & Footer
+% -------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{} % clear all
+
+% Left header: logo (if available)
+% Doxygen will copy docs/branding/logo-pdf.pdf into the latex output dir.
+\newcommand{\BrandLogo}{logo-pdf}
+\fancyhead[L]{%
+  \raisebox{0pt}[\height][\depth]{%
+    \includegraphics[height=11pt]{\BrandLogo}%
+  }%
+  \hspace{0.5em}%
+  \textsf{My C Project}%
+}
+
+% Right header: section title
+\fancyhead[R]{\nouppercase{\leftmark}}
+
+% Footer: page X of Y
+\fancyfoot[C]{\thepage\ of \pageref{LastPage}}
+
+% Line colors for headers/footers
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{%
+  \color{BrandPrimary}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------------------------------------------------------
+% Title page tweaks (optional)
+% -------------------------------------------------------
+% Doxygen defines \title, \author, etc. We just wrap them.
+\AtBeginDocument{%
+  % Slight tweak: put the project name in brand color
+  \let\OldDoxyTitle\title
+  \renewcommand{\title}[1]{%
+    \OldDoxyTitle{\color{BrandDark}##1}%
+  }
+}
+
+% -------------------------------------------------------
+% Misc tweaks
+% -------------------------------------------------------
+
+% Color for code keywords (Doxygen uses listings/Verbatim depending on config)
+\definecolor{CodeKeyword}{HTML}{D63384}
+\definecolor{CodeString}{HTML}{0CA678}
+
+% If you're using listings, you could do something like:
+% \usepackage{listings}
+% \lstset{
+%   keywordstyle=\color{CodeKeyword}\bfseries,
+%   stringstyle=\color{CodeString},
+%   basicstyle=\ttfamily\small,
+%   numberstyle=\tiny,
+%   numbers=left,
+%   stepnumber=1,
+%   numbersep=5pt
+% }
+
+% End of custom.sty
