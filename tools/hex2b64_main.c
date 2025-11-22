@@ -11,6 +11,8 @@
  *
  * @return 0 on success, non-zero if conversion fails.
  */
-int main(void) {
-    return hex2b64_stream(stdin, stdout);
+int
+main(void)
+{
+	return hex2b64_stream(stdin, stdout);
 }

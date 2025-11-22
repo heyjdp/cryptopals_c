@@ -7,6 +7,7 @@
  */
 
 #include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 
 /**
@@ -20,7 +21,7 @@
  * @param out Output stream that receives Base64 data.
  * @return 0 on success, non-zero on invalid input or I/O failure.
  */
-int hex2b64_stream(FILE *in, FILE *out);
+int hex2b64_stream(FILE * in, FILE * out);
 
 /**
  * @brief Convert a memory buffer of hexadecimal characters into Base64.
@@ -37,10 +38,7 @@ int hex2b64_stream(FILE *in, FILE *out);
  * @param out_len  Optional pointer that receives the bytes produced.
  * @return 0 on success, non-zero on invalid hex, odd digit count, or overflow.
  */
-int hex2b64_buffer(const unsigned char *hex,
-                   size_t hex_len,
-                   unsigned char *out,
-                   size_t out_cap,
-                   size_t *out_len);
+int hex2b64_buffer(const uint8_t * hex,
+    size_t hex_len, uint8_t * out, size_t out_cap, size_t *out_len);
 
 #endif /* HEX2B64_H */

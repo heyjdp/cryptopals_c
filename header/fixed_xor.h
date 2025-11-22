@@ -7,17 +7,20 @@
  */
 
 #include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 
 /**
  * @brief Status codes describing the outcome of fixed XOR operations.
  */
-typedef enum {
-    FIXED_XOR_OK = 0,             /**< Operation completed successfully. */
-    FIXED_XOR_ERR_ARGS = -1,      /**< Invalid arguments were supplied. */
-    FIXED_XOR_ERR_IO = -2,        /**< I/O failure while reading or writing. */
-    FIXED_XOR_ERR_ODD_INPUT = -3, /**< Stream input contained an odd byte count. */
-    FIXED_XOR_ERR_OOM = -4        /**< Memory allocation failed. */
+typedef enum
+{
+	FIXED_XOR_OK = 0,	  /**< Operation completed successfully. */
+	FIXED_XOR_ERR_ARGS = -1,  /**< Invalid arguments were supplied. */
+	FIXED_XOR_ERR_IO = -2,	  /**< I/O failure while reading or writing. */
+	FIXED_XOR_ERR_ODD_INPUT = -3,
+				  /**< Stream input contained an odd byte count. */
+	FIXED_XOR_ERR_OOM = -4	  /**< Memory allocation failed. */
 } fixed_xor_status;
 
 /**
@@ -29,10 +32,8 @@ typedef enum {
  * @param len Number of bytes to process.
  * @return FIXED_XOR_OK on success or an error status on failure.
  */
-fixed_xor_status fixed_xor_buffers(const unsigned char *lhs,
-                                   const unsigned char *rhs,
-                                   unsigned char *out,
-                                   size_t len);
+fixed_xor_status fixed_xor_buffers(const uint8_t * lhs,
+    const uint8_t * rhs, uint8_t * out, size_t len);
 
 /**
  * @brief XOR two half-length buffers read sequentially from a stream.
@@ -44,7 +45,7 @@ fixed_xor_status fixed_xor_buffers(const unsigned char *lhs,
  * @param out Stream that receives XOR output.
  * @return FIXED_XOR_OK on success or an error status on failure.
  */
-fixed_xor_status fixed_xor_stream(FILE *in, FILE *out);
+fixed_xor_status fixed_xor_stream(FILE * in, FILE * out);
 
 /**
  * @brief Convert a fixed_xor_status value into a human-readable string.

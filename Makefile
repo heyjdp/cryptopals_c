@@ -14,8 +14,8 @@ CRYPT_DIR := cryptopals
 CPPFLAGS += -I$(HEADER_DIR)
 
 LIBS := utils hex2b64 fixed_xor score_english_hex
-TOOLS := hex2b64 fixed_xor score_english_hex
-TESTS := hex2b64 fixed_xor score_english_hex
+TOOLS := hex2b64 fixed_xor
+TESTS := hex2b64 fixed_xor utils
 CRYPT_SOURCES := $(wildcard $(CRYPT_DIR)/*.c)
 CRYPT_TARGETS := $(patsubst $(CRYPT_DIR)/%.c,$(BIN_DIR)/cryptopals_%,$(CRYPT_SOURCES))
 

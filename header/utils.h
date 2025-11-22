@@ -1,7 +1,13 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+/**
+ * @file utils.h
+ * @brief Shared helpers for hex and single-byte XOR operations.
+ */
+
 #include <stddef.h>
+#include <stdint.h>
 
 /**
  * @brief Convert a single hexadecimal digit to its integer value.
@@ -19,7 +25,7 @@ int hex_digit_value(int c);
  * @param out_cap Capacity of @p out.
  * @return Number of bytes written on success, or -1 on error.
  */
-int hex_to_bytes(const char *hex, unsigned char *out, size_t out_cap);
+int hex_to_bytes(const char *hex, uint8_t * out, size_t out_cap);
 
 /**
  * @brief Encode bytes into a lowercase hex string.
@@ -28,7 +34,7 @@ int hex_to_bytes(const char *hex, unsigned char *out, size_t out_cap);
  * @param len     Number of bytes to encode.
  * @param out_hex Destination buffer (must be at least 2*len+1).
  */
-void bytes_to_hex(const unsigned char *bytes, size_t len, char *out_hex);
+void bytes_to_hex(const uint8_t * bytes, size_t len, char *out_hex);
 
 /**
  * @brief Convert a hex string into ASCII characters (best-effort).
@@ -50,9 +56,7 @@ void hex_to_ascii(const char *hex, char *ascii_out, size_t ascii_cap);
  * @return 0 on success, non-zero on error (invalid hex or allocation failure).
  */
 int brute_force_single_byte_xor(const char *hex_input,
-                                unsigned char *out_plain,
-                                size_t *out_len,
-                                unsigned char *out_key,
-                                double *out_score);
+    uint8_t * out_plain,
+    size_t *out_len, uint8_t * out_key, double *out_score);
 
 #endif /* UTILS_H */

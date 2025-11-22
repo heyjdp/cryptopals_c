@@ -1,3 +1,8 @@
+/**
+ * @file utest.h
+ * @brief Lightweight unit testing framework by Sean Middleditch.
+ */
+
 /*
    The latest version of this library is available on GitHub;
    https://github.com/sheredom/utest.h
@@ -151,22 +156,26 @@ typedef LARGE_INTEGER utest_large_integer;
 // use old QueryPerformanceCounter definitions (not sure is this needed in some
 // edge cases or not) on Win7 with VS2015 these extern declaration cause "second
 // C linkage of overloaded function not allowed" error
-typedef union {
-  struct {
-    unsigned long LowPart;
-    long HighPart;
-  } DUMMYSTRUCTNAME;
-  struct {
-    unsigned long LowPart;
-    long HighPart;
-  } u;
-  utest_int64_t QuadPart;
+typedef union
+{
+	struct
+	{
+		unsigned long LowPart;
+		long HighPart;
+	} DUMMYSTRUCTNAME;
+	struct
+	{
+		unsigned long LowPart;
+		long HighPart;
+	} u;
+	utest_int64_t QuadPart;
 } utest_large_integer;
 
-UTEST_C_FUNC __declspec(dllimport) int __stdcall QueryPerformanceCounter(
-    utest_large_integer *);
-UTEST_C_FUNC __declspec(dllimport) int __stdcall QueryPerformanceFrequency(
-    utest_large_integer *);
+UTEST_C_FUNC
+__declspec(dllimport)
+    int __stdcall QueryPerformanceCounter(utest_large_integer *);
+    UTEST_C_FUNC __declspec(dllimport)
+    int __stdcall QueryPerformanceFrequency(utest_large_integer *);
 
 #if defined(__MINGW64__) || defined(__MINGW32__)
 #pragma GCC diagnostic pop
@@ -321,56 +330,63 @@ UTEST_C_FUNC __declspec(dllimport) int __stdcall QueryPerformanceFrequency(
 #endif
 #endif
 
-static UTEST_INLINE void *utest_realloc(void *const pointer, size_t new_size) {
-  void *const new_pointer = realloc(pointer, new_size);
+static UTEST_INLINE void *
+utest_realloc(void *const pointer, size_t new_size)
+{
+	void *const new_pointer = realloc(pointer, new_size);
 
-  if (UTEST_NULL == new_pointer) {
-    free(pointer);
-  }
+	if (UTEST_NULL == new_pointer) {
+		free(pointer);
+	}
 
-  return new_pointer;
+	return new_pointer;
 }
 
 // Prevent 64-bit integer overflow when computing a timestamp by using a trick
 // from Sokol:
 // https://github.com/floooh/sokol/blob/189843bf4f86969ca4cc4b6d94e793a37c5128a7/sokol_time.h#L204
-static UTEST_INLINE utest_int64_t utest_mul_div(const utest_int64_t value,
-                                                const utest_int64_t numer,
-                                                const utest_int64_t denom) {
-  const utest_int64_t q = value / denom;
-  const utest_int64_t r = value % denom;
-  return q * numer + r * numer / denom;
+static UTEST_INLINE utest_int64_t
+utest_mul_div(const utest_int64_t value,
+    const utest_int64_t numer, const utest_int64_t denom)
+{
+	const utest_int64_t q = value / denom;
+	const utest_int64_t r = value % denom;
+	return q * numer + r * numer / denom;
 }
 
-static UTEST_INLINE utest_int64_t utest_ns(void) {
+static UTEST_INLINE utest_int64_t
+utest_ns(void)
+{
 #if defined(_MSC_VER) || defined(__MINGW64__) || defined(__MINGW32__)
-  utest_large_integer counter;
-  utest_large_integer frequency;
-  QueryPerformanceCounter(&counter);
-  QueryPerformanceFrequency(&frequency);
-  return utest_mul_div(counter.QuadPart, 1000000000, frequency.QuadPart);
+	utest_large_integer counter;
+	utest_large_integer frequency;
+	QueryPerformanceCounter(&counter);
+	QueryPerformanceFrequency(&frequency);
+	return utest_mul_div(counter.QuadPart, 1000000000, frequency.QuadPart);
 #elif defined(__linux__) && defined(__STRICT_ANSI__)
-  return utest_mul_div(clock(), 1000000000, CLOCKS_PER_SEC);
+	return utest_mul_div(clock(), 1000000000, CLOCKS_PER_SEC);
 #elif defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__) ||    \
     defined(__NetBSD__) || defined(__DragonFly__) || defined(__sun__) ||       \
     defined(__HAIKU__)
-  struct timespec ts;
+	struct timespec ts;
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L) &&              \
     !defined(__HAIKU__)
-  timespec_get(&ts, TIME_UTC);
+	timespec_get(&ts, TIME_UTC);
 #else
-  const clockid_t cid = CLOCK_REALTIME;
+	const clockid_t cid = CLOCK_REALTIME;
 #if defined(UTEST_USE_CLOCKGETTIME)
-  clock_gettime(cid, &ts);
+	clock_gettime(cid, &ts);
 #else
-  syscall(SYS_clock_gettime, cid, &ts);
+	syscall(SYS_clock_gettime, cid, &ts);
 #endif
 #endif
-  return UTEST_CAST(utest_int64_t, ts.tv_sec) * 1000 * 1000 * 1000 + ts.tv_nsec;
+	return UTEST_CAST(utest_int64_t,
+	    ts.tv_sec) * 1000 * 1000 * 1000 + ts.tv_nsec;
 #elif __APPLE__
-  return UTEST_CAST(utest_int64_t, clock_gettime_nsec_np(CLOCK_UPTIME_RAW));
+	return UTEST_CAST(utest_int64_t,
+	    clock_gettime_nsec_np(CLOCK_UPTIME_RAW));
 #elif __EMSCRIPTEN__
-  return emscripten_performance_now() * 1000000.0;
+	return emscripten_performance_now() * 1000000.0;
 #else
 #error Unsupported platform!
 #endif
@@ -378,16 +394,18 @@ static UTEST_INLINE utest_int64_t utest_ns(void) {
 
 typedef void (*utest_testcase_t)(int *, size_t);
 
-struct utest_test_state_s {
-  utest_testcase_t func;
-  size_t index;
-  char *name;
+struct utest_test_state_s
+{
+	utest_testcase_t func;
+	size_t index;
+	char *name;
 };
 
-struct utest_state_s {
-  struct utest_test_state_s *tests;
-  size_t tests_length;
-  FILE *output;
+struct utest_state_s
+{
+	struct utest_test_state_s *tests;
+	size_t tests_length;
+	FILE *output;
 };
 
 /* extern to the global state utest needs to execute */
@@ -456,122 +474,248 @@ UTEST_EXTERN struct utest_state_s utest_state;
 
 #include <type_traits>
 
-template <typename T, bool is_enum = std::is_enum<T>::value>
-struct utest_type_deducer final {
-  static void _(const T t);
+template < typename T, bool is_enum = std::is_enum < T >::value > struct utest_type_deducer
+    final {
+	static void
+	    _(const T t);
 };
 
-template <> struct utest_type_deducer<char, false> {
-  static void _(const char c) {
-    if (std::is_signed<decltype(c)>::value) {
-      UTEST_PRINTF("%d", static_cast<int>(c));
-    } else {
-      UTEST_PRINTF("%u", static_cast<unsigned int>(c));
-    }
-  }
-};
-template <> struct utest_type_deducer<signed char, false> {
-  static void _(const signed char c) {
-    UTEST_PRINTF("%d", static_cast<int>(c));
-  }
-};
+template <> struct utest_type_deducer <char,
+    false > {
+	static void
+	    _(const char c) {
+		    if (std::is_signed < decltype(c) >::value) {
+			UTEST_PRINTF("%d", static_cast < int >(c));} else
+			{
+			UTEST_PRINTF("%u",
+				    static_cast < unsigned int >(c));}
+		}
+	}; template <> struct utest_type_deducer < signed char, false > {
 
-template <> struct utest_type_deducer<unsigned char, false> {
-  static void _(const unsigned char c) {
-    UTEST_PRINTF("%u", static_cast<unsigned int>(c));
-  }
-};
+		static void _(const signed char c) {
+		    UTEST_PRINTF("%d", static_cast < int >(c));}
+	    }; template <> struct utest_type_deducer <unsigned char, false > {
 
-template <> struct utest_type_deducer<short, false> {
-  static void _(const short s) { UTEST_PRINTF("%d", static_cast<int>(s)); }
-};
-
-template <> struct utest_type_deducer<unsigned short, false> {
-  static void _(const unsigned short s) {
-    UTEST_PRINTF("%u", static_cast<unsigned>(s));
-  }
-};
-
-template <> struct utest_type_deducer<float, false> {
-  static void _(const float f) { UTEST_PRINTF("%f", static_cast<double>(f)); }
-};
-
-template <> struct utest_type_deducer<double, false> {
-  static void _(const double d) { UTEST_PRINTF("%f", d); }
-};
-
-template <> struct utest_type_deducer<long double, false> {
-  static void _(const long double d) {
+		    static void _(const unsigned char c) {
+			UTEST_PRINTF("%u",
+				    static_cast < unsigned int >(c));}
+		}; template <> struct utest_type_deducer <short, false > {
+			static void _(const short s) {UTEST_PRINTF("%d",
+					static_cast < int >(s));}
+		    };
+		    template <> struct utest_type_deducer <unsigned short,
+		    false > {
+			    static void _(const unsigned short s) {
+				UTEST_PRINTF("%u",
+					    static_cast < unsigned >(s));}
+			};
+			template <> struct utest_type_deducer <float, false > {
+				static void _(const float f)
+				{UTEST_PRINTF("%f",
+						static_cast < double >(f));}
+			    };
+			    template <> struct utest_type_deducer <double,
+			    false > {
+				    static void _(const double d)
+				    {UTEST_PRINTF("%f", d);}
+				};
+				template <> struct utest_type_deducer <long
+				double, false > {
+					static void _(const long double d) {
 #if defined(__MINGW32__) || defined(__MINGW64__)
-    /* MINGW is weird - doesn't like LF at all?! */
-    UTEST_PRINTF("%f", (double)d);
+						    /* MINGW is weird - doesn't like LF at all?! */
+						    UTEST_PRINTF("%f",
+							(double) d);
 #else
-    UTEST_PRINTF("%Lf", d);
+						    UTEST_PRINTF("%Lf", d);
 #endif
-  }
-};
-
-template <> struct utest_type_deducer<int, false> {
-  static void _(const int i) { UTEST_PRINTF("%d", i); }
-};
-
-template <> struct utest_type_deducer<unsigned int, false> {
-  static void _(const unsigned int i) { UTEST_PRINTF("%u", i); }
-};
-
-template <> struct utest_type_deducer<long, false> {
-  static void _(const long i) { UTEST_PRINTF("%ld", i); }
-};
-
-template <> struct utest_type_deducer<unsigned long, false> {
-  static void _(const unsigned long i) { UTEST_PRINTF("%lu", i); }
-};
-
-template <> struct utest_type_deducer<long long, false> {
-  static void _(const long long i) { UTEST_PRINTF("%lld", i); }
-};
-
-template <> struct utest_type_deducer<unsigned long long, false> {
-  static void _(const unsigned long long i) { UTEST_PRINTF("%llu", i); }
-};
-
-template <> struct utest_type_deducer<bool, false> {
-  static void _(const bool i) { UTEST_PRINTF(i ? "true" : "false"); }
-};
-
-template <typename T> struct utest_type_deducer<const T *, false> {
-  static void _(const T *t) {
-    UTEST_PRINTF("%p", static_cast<const void *>(t));
-  }
-};
-
-template <typename T> struct utest_type_deducer<T *, false> {
-  static void _(T *t) { UTEST_PRINTF("%p", static_cast<void *>(t)); }
-};
-
-template <typename T> struct utest_type_deducer<T, true> {
-  static void _(const T t) {
-    UTEST_PRINTF("%llu", static_cast<unsigned long long>(t));
-  }
-};
+					    }
+				    };
+				    template <> struct utest_type_deducer <int,
+				    false > {
+					    static void _(const int i)
+					    {UTEST_PRINTF("%d", i);}
+					};
+					template <> struct utest_type_deducer
+					<unsigned int, false > {
+						static void _(const unsigned
+						    int i) {UTEST_PRINTF("%u",
+								i);}
+					    };
+					    template <> struct
+					    utest_type_deducer <long, false > {
+						    static void _(const long i)
+						    {UTEST_PRINTF("%ld", i);}
+						};
+						template <> struct
+						utest_type_deducer <unsigned
+						long, false > {
+							static void _(const
+							    unsigned long i)
+							{UTEST_PRINTF("%lu",
+									i);}
+						    };
+						    template <> struct
+						    utest_type_deducer <long
+						    long, false > {
+							    static void _(const
+								long long i)
+							    {UTEST_PRINTF
+									("%lld",
+									    i);}
+							};
+							template <> struct
+							utest_type_deducer
+							<unsigned long long,
+							false > {
+								static void
+								_(const
+								    unsigned
+								    long long
+								    i)
+								{UTEST_PRINTF
+									    ("%llu",
+										i);}
+							    };
+							    template <> struct
+							    utest_type_deducer
+							    <bool, false > {
+								    static void
+								    _(const
+									bool i)
+								    {UTEST_PRINTF
+										(i ? "true" : "false");}
+								};
+								template <
+								typename T >
+								struct
+								utest_type_deducer
+								<const T *,
+								false > {
+									static
+									void
+									_(const
+									    T *
+									    t)
+									{
+									    UTEST_PRINTF
+										    ("%p",
+											static_cast
+											<
+											const
+											void
+											*>
+											(t));}
+								    };
+								    template <
+								    typename T
+								    >
+								    struct
+								    utest_type_deducer
+								    <T *,
+								    false > {
+									    static
+									    void
+									    _(T * t) {UTEST_PRINTF("%p", static_cast < void *>(t));}
+									};
+									template
+									<
+									typename
+									T >
+									struct
+									utest_type_deducer
+									<T,
+									true >
+									{
+										static
+										void
+										_
+										(const
+										    T
+										    t)
+										{
+										    UTEST_PRINTF
+											    ("%llu",
+												static_cast
+												<
+												unsigned
+												long
+												long
+												>
+												(t));}
+									    };
 
 // default printer for all other objects (specialize for custom printing)
-template <typename T> struct utest_type_deducer<T, false> {
-  static void _(const T& t) {
-    UTEST_PRINTF("(object %p)", static_cast<const void*>(&t));
-  }
-};
-
-template <> struct utest_type_deducer<std::nullptr_t, false> {
-  static void _(std::nullptr_t t) {
-    UTEST_PRINTF("%p", static_cast<void *>(t));
-  }
-};
-
-template <typename T>
-UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(const T& t) {
-  utest_type_deducer<T>::_(t);
-}
+									    template
+									    <
+									    typename
+									    T >
+									    struct
+									    utest_type_deducer
+									    <T,
+									    false
+									    > {
+										    static
+										    void
+										    _
+										    (const
+											T
+											&
+											t)
+										    {
+											UTEST_PRINTF
+												("(object %p)",
+												    static_cast
+												    <
+												    const
+												    void
+												    *>
+												    (&t));}
+										};
+										template
+										<>
+										struct
+										utest_type_deducer
+										<std::
+										nullptr_t,
+										false
+										>
+										{
+											static
+											void
+											_
+											(std::
+											    nullptr_t
+											    t)
+											{
+											    UTEST_PRINTF
+												    ("%p",
+													static_cast
+													<
+													void
+													*>
+													(t));}
+										    };
+										    template
+										    <
+										    typename
+										    T
+										    >
+										    UTEST_WEAK
+										    UTEST_OVERLOADABLE
+										    void
+										    utest_type_printer
+										    (const
+											T
+											&
+											t)
+										    {
+										    utest_type_deducer
+											    <
+											    T
+											    >::
+											    _
+											    (t);}
 
 #ifdef __clang__
 #pragma clang diagnostic pop
@@ -580,58 +724,78 @@ UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(const T& t) {
 #elif defined(UTEST_OVERLOADABLE)
 
 UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(signed char c);
-UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(signed char c) {
-  UTEST_PRINTF("%d", UTEST_CAST(int, c));
+UTEST_WEAK UTEST_OVERLOADABLE void
+utest_type_printer(signed char c)
+{
+	UTEST_PRINTF("%d", UTEST_CAST(int, c));
 }
 
 UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(unsigned char c);
-UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(unsigned char c) {
-  UTEST_PRINTF("%u", UTEST_CAST(unsigned int, c));
+UTEST_WEAK UTEST_OVERLOADABLE void
+utest_type_printer(unsigned char c)
+{
+	UTEST_PRINTF("%u", UTEST_CAST(unsigned int, c));
 }
 
 UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(float f);
-UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(float f) {
-  UTEST_PRINTF("%f", UTEST_CAST(double, f));
+UTEST_WEAK UTEST_OVERLOADABLE void
+utest_type_printer(float f)
+{
+	UTEST_PRINTF("%f", UTEST_CAST(double, f));
 }
 
 UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(double d);
-UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(double d) {
-  UTEST_PRINTF("%f", d);
+UTEST_WEAK UTEST_OVERLOADABLE void
+utest_type_printer(double d)
+{
+	UTEST_PRINTF("%f", d);
 }
 
 UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(long double d);
-UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(long double d) {
+UTEST_WEAK UTEST_OVERLOADABLE void
+utest_type_printer(long double d)
+{
 #if defined(__MINGW32__) || defined(__MINGW64__)
-  /* MINGW is weird - doesn't like LF at all?! */
-  UTEST_PRINTF("%f", (double)d);
+	/* MINGW is weird - doesn't like LF at all?! */
+	UTEST_PRINTF("%f", (double) d);
 #else
-  UTEST_PRINTF("%Lf", d);
+	UTEST_PRINTF("%Lf", d);
 #endif
 }
 
 UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(int i);
-UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(int i) {
-  UTEST_PRINTF("%d", i);
+UTEST_WEAK UTEST_OVERLOADABLE void
+utest_type_printer(int i)
+{
+	UTEST_PRINTF("%d", i);
 }
 
 UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(unsigned int i);
-UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(unsigned int i) {
-  UTEST_PRINTF("%u", i);
+UTEST_WEAK UTEST_OVERLOADABLE void
+utest_type_printer(unsigned int i)
+{
+	UTEST_PRINTF("%u", i);
 }
 
 UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(long int i);
-UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(long int i) {
-  UTEST_PRINTF("%ld", i);
+UTEST_WEAK UTEST_OVERLOADABLE void
+utest_type_printer(long int i)
+{
+	UTEST_PRINTF("%ld", i);
 }
 
 UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(long unsigned int i);
-UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(long unsigned int i) {
-  UTEST_PRINTF("%lu", i);
+UTEST_WEAK UTEST_OVERLOADABLE void
+utest_type_printer(long unsigned int i)
+{
+	UTEST_PRINTF("%lu", i);
 }
 
 UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(const void *p);
-UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(const void *p) {
-  UTEST_PRINTF("%p", p);
+UTEST_WEAK UTEST_OVERLOADABLE void
+utest_type_printer(const void *p)
+{
+	UTEST_PRINTF("%p", p);
 }
 
 /*
@@ -647,14 +811,18 @@ UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(const void *p) {
 #endif
 
 UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(long long int i);
-UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(long long int i) {
-  UTEST_PRINTF("%lld", i);
+UTEST_WEAK UTEST_OVERLOADABLE void
+utest_type_printer(long long int i)
+{
+	UTEST_PRINTF("%lld", i);
 }
 
-UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(long long unsigned int i);
+UTEST_WEAK UTEST_OVERLOADABLE void utest_type_printer(long long unsigned int
+    i);
 UTEST_WEAK UTEST_OVERLOADABLE void
-utest_type_printer(long long unsigned int i) {
-  UTEST_PRINTF("%llu", i);
+utest_type_printer(long long unsigned int i)
+{
+	UTEST_PRINTF("%llu", i);
 }
 
 #ifdef __clang__
@@ -734,10 +902,11 @@ utest_type_printer(long long unsigned int i) {
 #define UTEST_STRNCPY(x, y, size) strcpy_s(x, size, y)
 #elif !defined(__clang__) && defined(__GNUC__)
 static UTEST_INLINE char *
-utest_strncpy_gcc(char *const dst, const char *const src, const size_t size) {
+utest_strncpy_gcc(char *const dst, const char *const src, const size_t size)
+{
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstringop-overflow"
-  return strncpy(dst, src, size);
+	return strncpy(dst, src, size);
 #pragma GCC diagnostic pop
 }
 
@@ -1316,30 +1485,32 @@ utest_strncpy_gcc(char *const dst, const char *const src, const size_t size) {
 #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
 #endif
 
-UTEST_WEAK
-double utest_fabs(double d);
-UTEST_WEAK
-double utest_fabs(double d) {
-  union {
-    double d;
-    utest_uint64_t u;
-  } both;
-  both.d = d;
-  both.u &= 0x7fffffffffffffffu;
-  return both.d;
+UTEST_WEAK double utest_fabs(double d);
+UTEST_WEAK double
+utest_fabs(double d)
+{
+	union
+	{
+		double d;
+		utest_uint64_t u;
+	} both;
+	both.d = d;
+	both.u &= 0x7fffffffffffffffu;
+	return both.d;
 }
 
-UTEST_WEAK
-int utest_isnan(double d);
-UTEST_WEAK
-int utest_isnan(double d) {
-  union {
-    double d;
-    utest_uint64_t u;
-  } both;
-  both.d = d;
-  both.u &= 0x7fffffffffffffffu;
-  return both.u > 0x7ff0000000000000u;
+UTEST_WEAK int utest_isnan(double d);
+UTEST_WEAK int
+utest_isnan(double d)
+{
+	union
+	{
+		double d;
+		utest_uint64_t u;
+	} both;
+	both.d = d;
+	both.u &= 0x7fffffffffffffffu;
+	return both.u > 0x7ff0000000000000u;
 }
 
 #ifdef __clang__
@@ -1354,350 +1525,402 @@ int utest_isnan(double d) {
 #endif
 
 UTEST_WEAK
-int utest_should_filter_test(const char *filter, const char *testcase);
-UTEST_WEAK int utest_should_filter_test(const char *filter,
-                                        const char *testcase) {
-  if (filter) {
-    const char *filter_cur = filter;
-    const char *testcase_cur = testcase;
-    const char *filter_wildcard = UTEST_NULL;
+    int utest_should_filter_test(const char *filter, const char *testcase);
+UTEST_WEAK int
+utest_should_filter_test(const char *filter, const char *testcase)
+{
+	if (filter) {
+		const char *filter_cur = filter;
+		const char *testcase_cur = testcase;
+		const char *filter_wildcard = UTEST_NULL;
 
-    while (('\0' != *filter_cur) && ('\0' != *testcase_cur)) {
-      if ('*' == *filter_cur) {
-        /* store the position of the wildcard */
-        filter_wildcard = filter_cur;
+		while (('\0' != *filter_cur) && ('\0' != *testcase_cur)) {
+			if ('*' == *filter_cur) {
+				/* store the position of the wildcard */
+				filter_wildcard = filter_cur;
 
-        /* skip the wildcard character */
-        filter_cur++;
+				/* skip the wildcard character */
+				filter_cur++;
 
-        while (('\0' != *filter_cur) && ('\0' != *testcase_cur)) {
-          if ('*' == *filter_cur) {
-            /*
-               we found another wildcard (filter is something like *foo*) so we
-               exit the current loop, and return to the parent loop to handle
-               the wildcard case
-            */
-            break;
-          } else if (*filter_cur != *testcase_cur) {
-            /* otherwise our filter didn't match, so reset it */
-            filter_cur = filter_wildcard;
-          }
+				while (('\0' != *filter_cur)
+				    && ('\0' != *testcase_cur)) {
+					if ('*' == *filter_cur) {
+						/*
+						 * we found another wildcard (filter is something like *foo*) so we
+						 * exit the current loop, and return to the parent loop to handle
+						 * the wildcard case
+						 */
+						break;
+					} else if (*filter_cur !=
+					    *testcase_cur) {
+						/* otherwise our filter didn't match, so reset it */
+						filter_cur = filter_wildcard;
+					}
 
-          /* move testcase along */
-          testcase_cur++;
+					/* move testcase along */
+					testcase_cur++;
 
-          /* move filter along */
-          filter_cur++;
-        }
+					/* move filter along */
+					filter_cur++;
+				}
 
-        if (('\0' == *filter_cur) && ('\0' == *testcase_cur)) {
-          return 0;
-        }
+				if (('\0' == *filter_cur)
+				    && ('\0' == *testcase_cur)) {
+					return 0;
+				}
 
-        /* if the testcase has been exhausted, we don't have a match! */
-        if ('\0' == *testcase_cur) {
-          return 1;
-        }
-      } else {
-        if (*testcase_cur != *filter_cur) {
-          /* test case doesn't match filter */
-          return 1;
-        } else {
-          /* move our filter and testcase forward */
-          testcase_cur++;
-          filter_cur++;
-        }
-      }
-    }
+				/* if the testcase has been exhausted, we don't have a match! */
+				if ('\0' == *testcase_cur) {
+					return 1;
+				}
+			} else {
+				if (*testcase_cur != *filter_cur) {
+					/* test case doesn't match filter */
+					return 1;
+				} else {
+					/* move our filter and testcase forward */
+					testcase_cur++;
+					filter_cur++;
+				}
+			}
+		}
 
-    if (('\0' != *filter_cur) ||
-        (('\0' != *testcase_cur) &&
-         ((filter == filter_cur) || ('*' != filter_cur[-1])))) {
-      /* we have a mismatch! */
-      return 1;
-    }
-  }
+		if (('\0' != *filter_cur) ||
+		    (('\0' != *testcase_cur) &&
+			((filter == filter_cur) || ('*' != filter_cur[-1])))) {
+			/* we have a mismatch! */
+			return 1;
+		}
+	}
 
-  return 0;
+	return 0;
 }
 
-static UTEST_INLINE FILE *utest_fopen(const char *filename, const char *mode) {
+static UTEST_INLINE FILE *
+utest_fopen(const char *filename, const char *mode)
+{
 #ifdef _MSC_VER
-  FILE *file;
-  if (0 == fopen_s(&file, filename, mode)) {
-    return file;
-  } else {
-    return UTEST_NULL;
-  }
+	FILE *file;
+	if (0 == fopen_s(&file, filename, mode)) {
+		return file;
+	} else {
+		return UTEST_NULL;
+	}
 #else
-  return fopen(filename, mode);
+	return fopen(filename, mode);
 #endif
 }
 
 static UTEST_INLINE int utest_main(int argc, const char *const argv[]);
-int utest_main(int argc, const char *const argv[]) {
-  utest_uint64_t failed = 0;
-  utest_uint64_t skipped = 0;
-  size_t index = 0;
-  size_t *failed_testcases = UTEST_NULL;
-  size_t failed_testcases_length = 0;
-  size_t *skipped_testcases = UTEST_NULL;
-  size_t skipped_testcases_length = 0;
-  const char *filter = UTEST_NULL;
-  utest_uint64_t ran_tests = 0;
-  int enable_mixed_units = 0;
-  int random_order = 0;
-  utest_uint32_t seed = 0;
+int
+utest_main(int argc, const char *const argv[])
+{
+	utest_uint64_t failed = 0;
+	utest_uint64_t skipped = 0;
+	size_t index = 0;
+	size_t *failed_testcases = UTEST_NULL;
+	size_t failed_testcases_length = 0;
+	size_t *skipped_testcases = UTEST_NULL;
+	size_t skipped_testcases_length = 0;
+	const char *filter = UTEST_NULL;
+	utest_uint64_t ran_tests = 0;
+	int enable_mixed_units = 0;
+	int random_order = 0;
+	utest_uint32_t seed = 0;
 
-  enum colours { RESET, GREEN, RED, YELLOW };
+	enum colours
+	{ RESET, GREEN, RED, YELLOW };
 
-  const int use_colours = UTEST_COLOUR_OUTPUT();
-  const char *colours[] = {"\033[0m", "\033[32m", "\033[31m", "\033[33m"};
+	const int use_colours = UTEST_COLOUR_OUTPUT();
+	const char *colours[] =
+	    { "\033[0m", "\033[32m", "\033[31m", "\033[33m" };
 
-  if (!use_colours) {
-    for (index = 0; index < sizeof colours / sizeof colours[0]; index++) {
-      colours[index] = "";
-    }
-  }
-  /* loop through all arguments looking for our options */
-  for (index = 1; index < UTEST_CAST(size_t, argc); index++) {
-    /* Informational switches */
-    const char help_str[] = "--help";
-    const char list_str[] = "--list-tests";
-    /* Test config switches */
-    const char filter_str[] = "--filter=";
-    const char output_str[] = "--output=";
-    const char enable_mixed_units_str[] = "--enable-mixed-units";
-    const char random_order_str[] = "--random-order";
-    const char random_order_with_seed_str[] = "--random-order=";
+	if (!use_colours) {
+		for (index = 0; index < sizeof colours / sizeof colours[0];
+		    index++) {
+			colours[index] = "";
+		}
+	}
+	/* loop through all arguments looking for our options */
+	for (index = 1; index < UTEST_CAST(size_t, argc); index++) {
+		/* Informational switches */
+		const char help_str[] = "--help";
+		const char list_str[] = "--list-tests";
+		/* Test config switches */
+		const char filter_str[] = "--filter=";
+		const char output_str[] = "--output=";
+		const char enable_mixed_units_str[] = "--enable-mixed-units";
+		const char random_order_str[] = "--random-order";
+		const char random_order_with_seed_str[] = "--random-order=";
 
-    if (0 == UTEST_STRNCMP(argv[index], help_str, strlen(help_str))) {
-      printf("utest.h - the single file unit testing solution for C/C++!\n"
-             "Command line Options:\n"
-             "  --help                  Show this message and exit.\n"
-             "  --filter=<filter>       Filter the test cases to run (EG. "
-             "MyTest*.a would run MyTestCase.a but not MyTestCase.b).\n"
-             "  --list-tests            List testnames, one per line. Output "
-             "names can be passed to --filter.\n");
-      printf("  --output=<output>       Output an xunit XML file to the file "
-             "specified in <output>.\n"
-             "  --enable-mixed-units    Enable the per-test output to contain "
-             "mixed units (s/ms/us/ns).\n"
-             "  --random-order[=<seed>] Randomize the order that the tests are "
-             "ran in. If the optional <seed> argument is not provided, then a "
-             "random starting seed is used.\n");
-      goto cleanup;
-    } else if (0 ==
-               UTEST_STRNCMP(argv[index], filter_str, strlen(filter_str))) {
-      /* user wants to filter what test cases run! */
-      filter = argv[index] + strlen(filter_str);
-    } else if (0 ==
-               UTEST_STRNCMP(argv[index], output_str, strlen(output_str))) {
-      utest_state.output = utest_fopen(argv[index] + strlen(output_str), "w+");
-    } else if (0 == UTEST_STRNCMP(argv[index], list_str, strlen(list_str))) {
-      for (index = 0; index < utest_state.tests_length; index++) {
-        UTEST_PRINTF("%s\n", utest_state.tests[index].name);
-      }
-      /* when printing the test list, don't actually run the tests */
-      return 0;
-    } else if (0 == UTEST_STRNCMP(argv[index], enable_mixed_units_str,
-                                  strlen(enable_mixed_units_str))) {
-      enable_mixed_units = 1;
-    } else if (0 == UTEST_STRNCMP(argv[index], random_order_with_seed_str,
-                                  strlen(random_order_with_seed_str))) {
-      seed =
-          UTEST_CAST(utest_uint32_t,
-                     strtoul(argv[index] + strlen(random_order_with_seed_str),
-                             UTEST_NULL, 10));
-      random_order = 1;
-    } else if (0 == UTEST_STRNCMP(argv[index], random_order_str,
-                                  strlen(random_order_str))) {
-      const utest_int64_t ns = utest_ns();
+		if (0 == UTEST_STRNCMP(argv[index], help_str,
+			strlen(help_str))) {
+			printf
+			    ("utest.h - the single file unit testing solution for C/C++!\n"
+			    "Command line Options:\n"
+			    "  --help                  Show this message and exit.\n"
+			    "  --filter=<filter>       Filter the test cases to run (EG. "
+			    "MyTest*.a would run MyTestCase.a but not MyTestCase.b).\n"
+			    "  --list-tests            List testnames, one per line. Output "
+			    "names can be passed to --filter.\n");
+			printf
+			    ("  --output=<output>       Output an xunit XML file to the file "
+			    "specified in <output>.\n"
+			    "  --enable-mixed-units    Enable the per-test output to contain "
+			    "mixed units (s/ms/us/ns).\n"
+			    "  --random-order[=<seed>] Randomize the order that the tests are "
+			    "ran in. If the optional <seed> argument is not provided, then a "
+			    "random starting seed is used.\n");
+			goto cleanup;
+		} else if (0 ==
+		    UTEST_STRNCMP(argv[index], filter_str,
+			strlen(filter_str))) {
+			/* user wants to filter what test cases run! */
+			filter = argv[index] + strlen(filter_str);
+		} else if (0 ==
+		    UTEST_STRNCMP(argv[index], output_str,
+			strlen(output_str))) {
+			utest_state.output =
+			    utest_fopen(argv[index] + strlen(output_str),
+			    "w+");
+		} else if (0 == UTEST_STRNCMP(argv[index], list_str,
+			strlen(list_str))) {
+			for (index = 0; index < utest_state.tests_length;
+			    index++) {
+				UTEST_PRINTF("%s\n",
+				    utest_state.tests[index].name);
+			}
+			/* when printing the test list, don't actually run the tests */
+			return 0;
+		} else if (0 == UTEST_STRNCMP(argv[index],
+			enable_mixed_units_str,
+			strlen(enable_mixed_units_str))) {
+			enable_mixed_units = 1;
+		} else if (0 == UTEST_STRNCMP(argv[index],
+			random_order_with_seed_str,
+			strlen(random_order_with_seed_str))) {
+			seed =
+			    UTEST_CAST(utest_uint32_t,
+			    strtoul(argv[index] +
+				strlen(random_order_with_seed_str), UTEST_NULL,
+				10));
+			random_order = 1;
+		} else if (0 == UTEST_STRNCMP(argv[index], random_order_str,
+			strlen(random_order_str))) {
+			const utest_int64_t ns = utest_ns();
 
-      // Some really poor pseudo-random using the current time. I do this
-      // because I really want to avoid using C's rand() because that'd mean our
-      // random would be affected by any srand() usage by the user (which I
-      // don't want).
-      seed = UTEST_CAST(utest_uint32_t, ns >> 32) * 31 +
-             UTEST_CAST(utest_uint32_t, ns & 0xffffffff);
-      random_order = 1;
-    }
-  }
+			// Some really poor pseudo-random using the current time. I do this
+			// because I really want to avoid using C's rand() because that'd mean our
+			// random would be affected by any srand() usage by the user (which I
+			// don't want).
+			seed = UTEST_CAST(utest_uint32_t, ns >> 32) * 31 +
+			    UTEST_CAST(utest_uint32_t, ns & 0xffffffff);
+			random_order = 1;
+		}
+	}
 
-  if (random_order) {
-    // Use Fisher-Yates with the Durstenfield's version to randomly re-order the
-    // tests.
-    for (index = utest_state.tests_length; index > 1; index--) {
-      // For the random order we'll use PCG.
-      const utest_uint32_t state = seed;
-      const utest_uint32_t word =
-          ((state >> ((state >> 28u) + 4u)) ^ state) * 277803737u;
-      const utest_uint32_t next =
-          ((word >> 22u) ^ word) % UTEST_CAST(utest_uint32_t, index);
+	if (random_order) {
+		// Use Fisher-Yates with the Durstenfield's version to randomly re-order the
+		// tests.
+		for (index = utest_state.tests_length; index > 1; index--) {
+			// For the random order we'll use PCG.
+			const utest_uint32_t state = seed;
+			const utest_uint32_t word =
+			    ((state >> ((state >> 28u) +
+				    4u)) ^ state) * 277803737u;
+			const utest_uint32_t next =
+			    ((word >> 22u) ^ word) % UTEST_CAST(utest_uint32_t,
+			    index);
 
-      // Swap the randomly chosen element into the last location.
-      const struct utest_test_state_s copy = utest_state.tests[index - 1];
-      utest_state.tests[index - 1] = utest_state.tests[next];
-      utest_state.tests[next] = copy;
+			// Swap the randomly chosen element into the last location.
+			const struct utest_test_state_s copy =
+			    utest_state.tests[index - 1];
+			utest_state.tests[index - 1] = utest_state.tests[next];
+			utest_state.tests[next] = copy;
 
-      // Move the seed onwards.
-      seed = seed * 747796405u + 2891336453u;
-    }
-  }
+			// Move the seed onwards.
+			seed = seed * 747796405u + 2891336453u;
+		}
+	}
 
-  for (index = 0; index < utest_state.tests_length; index++) {
-    if (utest_should_filter_test(filter, utest_state.tests[index].name)) {
-      continue;
-    }
+	for (index = 0; index < utest_state.tests_length; index++) {
+		if (utest_should_filter_test(filter,
+			utest_state.tests[index].name)) {
+			continue;
+		}
 
-    ran_tests++;
-  }
+		ran_tests++;
+	}
 
-  printf("%s[==========]%s Running %" UTEST_PRIu64 " test cases.\n",
-         colours[GREEN], colours[RESET], UTEST_CAST(utest_uint64_t, ran_tests));
+	printf("%s[==========]%s Running %" UTEST_PRIu64 " test cases.\n",
+	    colours[GREEN], colours[RESET], UTEST_CAST(utest_uint64_t,
+		ran_tests));
 
-  if (utest_state.output) {
-    fprintf(utest_state.output, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-    fprintf(utest_state.output,
-            "<testsuites tests=\"%" UTEST_PRIu64 "\" name=\"All\">\n",
-            UTEST_CAST(utest_uint64_t, ran_tests));
-    fprintf(utest_state.output,
-            "<testsuite name=\"Tests\" tests=\"%" UTEST_PRIu64 "\">\n",
-            UTEST_CAST(utest_uint64_t, ran_tests));
-  }
+	if (utest_state.output) {
+		fprintf(utest_state.output,
+		    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+		fprintf(utest_state.output,
+		    "<testsuites tests=\"%" UTEST_PRIu64 "\" name=\"All\">\n",
+		    UTEST_CAST(utest_uint64_t, ran_tests));
+		fprintf(utest_state.output,
+		    "<testsuite name=\"Tests\" tests=\"%" UTEST_PRIu64 "\">\n",
+		    UTEST_CAST(utest_uint64_t, ran_tests));
+	}
 
-  for (index = 0; index < utest_state.tests_length; index++) {
-    int result = UTEST_TEST_PASSED;
-    utest_int64_t ns = 0;
+	for (index = 0; index < utest_state.tests_length; index++) {
+		int result = UTEST_TEST_PASSED;
+		utest_int64_t ns = 0;
 
-    if (utest_should_filter_test(filter, utest_state.tests[index].name)) {
-      continue;
-    }
+		if (utest_should_filter_test(filter,
+			utest_state.tests[index].name)) {
+			continue;
+		}
 
-    printf("%s[ RUN      ]%s %s\n", colours[GREEN], colours[RESET],
-           utest_state.tests[index].name);
+		printf("%s[ RUN      ]%s %s\n", colours[GREEN], colours[RESET],
+		    utest_state.tests[index].name);
 
-    if (utest_state.output) {
-      fprintf(utest_state.output, "<testcase name=\"%s\">",
-              utest_state.tests[index].name);
-    }
+		if (utest_state.output) {
+			fprintf(utest_state.output, "<testcase name=\"%s\">",
+			    utest_state.tests[index].name);
+		}
 
-    ns = utest_ns();
-    errno = 0;
+		ns = utest_ns();
+		errno = 0;
 #if defined(UTEST_HAS_EXCEPTIONS)
-    UTEST_SURPRESS_WARNING_BEGIN
-    try {
-      utest_state.tests[index].func(&result, utest_state.tests[index].index);
-    } catch (const std::exception &err) {
-      printf(" Exception : %s\n", err.what());
-      result = UTEST_TEST_FAILURE;
-    } catch (...) {
-      printf(" Exception : Unknown\n");
-      result = UTEST_TEST_FAILURE;
-    }
-    UTEST_SURPRESS_WARNING_END
+		UTEST_SURPRESS_WARNING_BEGIN try {
+			utest_state.tests[index].func(&result,
+			    utest_state.tests[index].index);
+		}
+		catch(const std::exception & err)
+		{
+			printf(" Exception : %s\n", err.what());
+			result = UTEST_TEST_FAILURE;
+		} catch( ...) {
+			printf(" Exception : Unknown\n");
+			result = UTEST_TEST_FAILURE;
+		}
+		UTEST_SURPRESS_WARNING_END
 #else
-    utest_state.tests[index].func(&result, utest_state.tests[index].index);
+		utest_state.tests[index].func(&result,
+		    utest_state.tests[index].index);
 #endif
-    ns = utest_ns() - ns;
+		ns = utest_ns() - ns;
 
-    if (utest_state.output) {
-      fprintf(utest_state.output, "</testcase>\n");
-    }
+		if (utest_state.output) {
+			fprintf(utest_state.output, "</testcase>\n");
+		}
 
-    // Record the failing test.
-    if (UTEST_TEST_FAILURE == result) {
-      const size_t failed_testcase_index = failed_testcases_length++;
-      failed_testcases = UTEST_PTR_CAST(
-          size_t *, utest_realloc(UTEST_PTR_CAST(void *, failed_testcases),
-                                  sizeof(size_t) * failed_testcases_length));
-      if (UTEST_NULL != failed_testcases) {
-        failed_testcases[failed_testcase_index] = index;
-      }
-      failed++;
-    } else if (UTEST_TEST_SKIPPED == result) {
-      const size_t skipped_testcase_index = skipped_testcases_length++;
-      skipped_testcases = UTEST_PTR_CAST(
-          size_t *, utest_realloc(UTEST_PTR_CAST(void *, skipped_testcases),
-                                  sizeof(size_t) * skipped_testcases_length));
-      if (UTEST_NULL != skipped_testcases) {
-        skipped_testcases[skipped_testcase_index] = index;
-      }
-      skipped++;
-    }
+		// Record the failing test.
+		if (UTEST_TEST_FAILURE == result) {
+			const size_t failed_testcase_index =
+			    failed_testcases_length++;
+			failed_testcases =
+			    UTEST_PTR_CAST(size_t *,
+			    utest_realloc(UTEST_PTR_CAST(void *,
+				    failed_testcases),
+				sizeof(size_t) * failed_testcases_length));
+			if (UTEST_NULL != failed_testcases) {
+				failed_testcases[failed_testcase_index] =
+				    index;
+			}
+			failed++;
+		} else if (UTEST_TEST_SKIPPED == result) {
+			const size_t skipped_testcase_index =
+			    skipped_testcases_length++;
+			skipped_testcases =
+			    UTEST_PTR_CAST(size_t *,
+			    utest_realloc(UTEST_PTR_CAST(void *,
+				    skipped_testcases),
+				sizeof(size_t) * skipped_testcases_length));
+			if (UTEST_NULL != skipped_testcases) {
+				skipped_testcases[skipped_testcase_index] =
+				    index;
+			}
+			skipped++;
+		}
 
-    {
-      const char *const units[] = {"ns", "us", "ms", "s", UTEST_NULL};
-      unsigned int unit_index = 0;
-      utest_int64_t time = ns;
+		{
+			const char *const units[] =
+			    { "ns", "us", "ms", "s", UTEST_NULL };
+			unsigned int unit_index = 0;
+			utest_int64_t time = ns;
 
-      if (enable_mixed_units) {
-        for (unit_index = 0; UTEST_NULL != units[unit_index]; unit_index++) {
-          if (10000 > time) {
-            break;
-          }
+			if (enable_mixed_units) {
+				for (unit_index = 0;
+				    UTEST_NULL != units[unit_index];
+				    unit_index++) {
+					if (10000 > time) {
+						break;
+					}
 
-          time /= 1000;
-        }
-      }
+					time /= 1000;
+				}
+			}
 
-      if (UTEST_TEST_FAILURE == result) {
-        printf("%s[  FAILED  ]%s %s (%" UTEST_PRId64 "%s)\n", colours[RED],
-               colours[RESET], utest_state.tests[index].name, time,
-               units[unit_index]);
-      } else if (UTEST_TEST_SKIPPED == result) {
-        printf("%s[  SKIPPED ]%s %s (%" UTEST_PRId64 "%s)\n", colours[YELLOW],
-               colours[RESET], utest_state.tests[index].name, time,
-               units[unit_index]);
-      } else {
-        printf("%s[       OK ]%s %s (%" UTEST_PRId64 "%s)\n", colours[GREEN],
-               colours[RESET], utest_state.tests[index].name, time,
-               units[unit_index]);
-      }
-    }
-  }
+			if (UTEST_TEST_FAILURE == result) {
+				printf("%s[  FAILED  ]%s %s (%" UTEST_PRId64
+				    "%s)\n", colours[RED], colours[RESET],
+				    utest_state.tests[index].name, time,
+				    units[unit_index]);
+			} else if (UTEST_TEST_SKIPPED == result) {
+				printf("%s[  SKIPPED ]%s %s (%" UTEST_PRId64
+				    "%s)\n", colours[YELLOW], colours[RESET],
+				    utest_state.tests[index].name, time,
+				    units[unit_index]);
+			} else {
+				printf("%s[       OK ]%s %s (%" UTEST_PRId64
+				    "%s)\n", colours[GREEN], colours[RESET],
+				    utest_state.tests[index].name, time,
+				    units[unit_index]);
+			}
+		}
+	}
 
-  printf("%s[==========]%s %" UTEST_PRIu64 " test cases ran.\n", colours[GREEN],
-         colours[RESET], ran_tests);
-  printf("%s[  PASSED  ]%s %" UTEST_PRIu64 " tests.\n", colours[GREEN],
-         colours[RESET], ran_tests - failed - skipped);
+	printf("%s[==========]%s %" UTEST_PRIu64 " test cases ran.\n",
+	    colours[GREEN], colours[RESET], ran_tests);
+	printf("%s[  PASSED  ]%s %" UTEST_PRIu64 " tests.\n", colours[GREEN],
+	    colours[RESET], ran_tests - failed - skipped);
 
-  if (0 != skipped) {
-    printf("%s[  SKIPPED ]%s %" UTEST_PRIu64 " tests, listed below:\n",
-           colours[YELLOW], colours[RESET], skipped);
-    for (index = 0; index < skipped_testcases_length; index++) {
-      printf("%s[  SKIPPED ]%s %s\n", colours[YELLOW], colours[RESET],
-             utest_state.tests[skipped_testcases[index]].name);
-    }
-  }
+	if (0 != skipped) {
+		printf("%s[  SKIPPED ]%s %" UTEST_PRIu64
+		    " tests, listed below:\n", colours[YELLOW], colours[RESET],
+		    skipped);
+		for (index = 0; index < skipped_testcases_length; index++) {
+			printf("%s[  SKIPPED ]%s %s\n", colours[YELLOW],
+			    colours[RESET],
+			    utest_state.tests[skipped_testcases[index]].name);
+		}
+	}
 
-  if (0 != failed) {
-    printf("%s[  FAILED  ]%s %" UTEST_PRIu64 " tests, listed below:\n",
-           colours[RED], colours[RESET], failed);
-    for (index = 0; index < failed_testcases_length; index++) {
-      printf("%s[  FAILED  ]%s %s\n", colours[RED], colours[RESET],
-             utest_state.tests[failed_testcases[index]].name);
-    }
-  }
+	if (0 != failed) {
+		printf("%s[  FAILED  ]%s %" UTEST_PRIu64
+		    " tests, listed below:\n", colours[RED], colours[RESET],
+		    failed);
+		for (index = 0; index < failed_testcases_length; index++) {
+			printf("%s[  FAILED  ]%s %s\n", colours[RED],
+			    colours[RESET],
+			    utest_state.tests[failed_testcases[index]].name);
+		}
+	}
 
-  if (utest_state.output) {
-    fprintf(utest_state.output, "</testsuite>\n</testsuites>\n");
-  }
+	if (utest_state.output) {
+		fprintf(utest_state.output, "</testsuite>\n</testsuites>\n");
+	}
 
-cleanup:
-  for (index = 0; index < utest_state.tests_length; index++) {
-    free(UTEST_PTR_CAST(void *, utest_state.tests[index].name));
-  }
+      cleanup:
+	for (index = 0; index < utest_state.tests_length; index++) {
+		free(UTEST_PTR_CAST(void *, utest_state.tests[index].name));
+	}
 
-  free(UTEST_PTR_CAST(void *, skipped_testcases));
-  free(UTEST_PTR_CAST(void *, failed_testcases));
-  free(UTEST_PTR_CAST(void *, utest_state.tests));
+	free(UTEST_PTR_CAST(void *, skipped_testcases));
+	free(UTEST_PTR_CAST(void *, failed_testcases));
+	free(UTEST_PTR_CAST(void *, utest_state.tests));
 
-  if (utest_state.output) {
-    fclose(utest_state.output);
-  }
+	if (utest_state.output) {
+		fclose(utest_state.output);
+	}
 
-  return UTEST_CAST(int, failed);
+	return UTEST_CAST(int, failed);
 }
 
 #if defined(__clang__)
