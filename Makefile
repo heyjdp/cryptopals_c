@@ -13,7 +13,7 @@ CRYPT_DIR := cryptopals
 
 CPPFLAGS += -I$(HEADER_DIR)
 
-LIBS := hex2b64 fixed_xor score_english_hex
+LIBS := utils hex2b64 fixed_xor score_english_hex
 TOOLS := hex2b64 fixed_xor score_english_hex
 TESTS := hex2b64 fixed_xor score_english_hex
 CRYPT_SOURCES := $(wildcard $(CRYPT_DIR)/*.c)
@@ -43,7 +43,7 @@ tools: $(TOOL_BINS)
 
 cryptopals: $(CRYPT_TARGETS)
 
-$(BIN_DIR)/%: $(BUILD_DIR)/tools/%_main.o $(BUILD_DIR)/lib/%.o | $(BIN_DIR)
+$(BIN_DIR)/%: $(BUILD_DIR)/tools/%_main.o $(BUILD_DIR)/lib/%.o $(BUILD_DIR)/lib/utils.o $(BUILD_DIR)/lib/fixed_xor.o $(BUILD_DIR)/lib/score_english_hex.o | $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $@ $^
 
 $(BUILD_DIR)/tools/%_main.o: $(TOOLS_DIR)/%_main.c | $(BUILD_DIR)/tools
@@ -55,7 +55,7 @@ $(BUILD_DIR)/lib/%.o: $(LIB_DIR)/%.c $(HEADER_DIR)/%.h | $(BUILD_DIR)/lib
 $(BUILD_DIR)/lib $(BUILD_DIR)/tools $(BUILD_DIR)/tests $(BIN_DIR) $(TEST_BIN_DIR) $(BIN_DIR)/cryptopals:
 	@mkdir -p $@
 
-$(TEST_BIN_DIR)/test_%: $(BUILD_DIR)/tests/test_%.o $(BUILD_DIR)/lib/%.o | $(TEST_BIN_DIR)
+$(TEST_BIN_DIR)/test_%: $(BUILD_DIR)/tests/test_%.o $(BUILD_DIR)/lib/%.o $(BUILD_DIR)/lib/utils.o $(BUILD_DIR)/lib/fixed_xor.o $(BUILD_DIR)/lib/score_english_hex.o | $(TEST_BIN_DIR)
 	$(CC) $(CFLAGS) -o $@ $^
 
 $(BUILD_DIR)/tests/test_%.o: $(TESTS_DIR)/test_%.c | $(BUILD_DIR)/tests

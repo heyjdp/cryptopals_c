@@ -1,6 +1,11 @@
 ./bin
 ./build
 
+*.pdf
+./docs/html
+./docs/xml
+./docs/latex
+
 # Prerequisites
 *.d
 

@@ -1,0 +1,44 @@
+/**
+ * @file set_1_challenge_3.c
+ * @brief Cryptopals Set 1 Challenge 3: single-byte XOR cipher.
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "fixed_xor.h"
+#include "score_english_hex.h"
+#include "utils.h"
+
+int main(void) {
+    const char *hex_input =
+        "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
+
+    unsigned char best_plain[128];
+    size_t best_len = 0;
+    unsigned char best_key = 0;
+    double best_score = 0.0;
+
+    if (brute_force_single_byte_xor(hex_input,
+                                    best_plain,
+                                    &best_len,
+                                    &best_key,
+                                    &best_score) != 0) {
+        fprintf(stderr, "Failed to process ciphertext\n");
+        return EXIT_FAILURE;
+    }
+
+    char best_hex[256];
+    bytes_to_hex(best_plain, best_len, best_hex);
+
+    char best_ascii[128];
+    hex_to_ascii(best_hex, best_ascii, sizeof(best_ascii));
+
+    printf("Best key: 0x%02x\n", best_key);
+    printf("Best plaintext (hex): %s\n", best_hex);
+    printf("Best plaintext (ascii): %s\n", best_ascii);
+    printf("Score: %.2f\n", best_score);
+
+    return EXIT_SUCCESS;
+}

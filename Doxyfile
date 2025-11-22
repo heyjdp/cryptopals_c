@@ -68,7 +68,7 @@ OUTPUT_LANGUAGE        = English
 #---------------------------------------------------------------------------
 
 # HTML
-GENERATE_HTML          = YES
+GENERATE_HTML          = NO
 HTML_OUTPUT            = html
 HTML_DYNAMIC_SECTIONS  = YES
 SEARCHENGINE           = YES

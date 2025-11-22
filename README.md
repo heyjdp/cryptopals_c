@@ -29,7 +29,8 @@ The goal is to deeply understand how the primitives work internally.
 
 ## Documentation
 
-[index.html](./docs/html/index.html)
+There is a doxygen PDF in `./docs`
+
 ---
 
 ## Requirements

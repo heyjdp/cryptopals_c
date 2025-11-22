@@ -8,23 +8,12 @@
 #include <ctype.h>
 #include <stdio.h>
 
+#include "utils.h"
+
 static const char b64_table[] =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     "abcdefghijklmnopqrstuvwxyz"
     "0123456789+/";
-
-/**
- * @brief Convert a single hexadecimal character into its integer value.
- *
- * @param c Character to convert.
- * @return 0-15 for valid hex digits, or -1 when @p c is not hexadecimal.
- */
-static int hex_value(int c) {
-    if (c >= '0' && c <= '9') return c - '0';
-    if (c >= 'a' && c <= 'f') return 10 + (c - 'a');
-    if (c >= 'A' && c <= 'F') return 10 + (c - 'A');
-    return -1;
-}
 
 /**
  * @brief Produce four Base64 characters from up to three bytes.
@@ -79,7 +68,7 @@ int hex2b64_stream(FILE *in, FILE *out) {
             continue;
         }
 
-        int v = hex_value(ch);
+        int v = hex_digit_value(ch);
         if (v < 0) {
             fprintf(stderr, "Error: invalid hex character '%c'\n", ch);
             return 1;
@@ -140,7 +129,7 @@ int hex2b64_buffer(const unsigned char *hex,
             continue;
         }
 
-        int v = hex_value(ch);
+        int v = hex_digit_value(ch);
         if (v < 0) {
             return 1;
         }

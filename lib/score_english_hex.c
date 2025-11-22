@@ -7,6 +7,8 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "utils.h"
+
 /**
  * @brief English letter frequency proportions for a-z plus space.
  *
@@ -42,19 +44,6 @@ static const double english_freq[27] = {
     0.1300  // space (very common in normal English text)
 };
 
-/**
- * @brief Convert a single hex character to its integer value.
- *
- * @param c Hex digit to convert.
- * @return 0-15 on success or -1 on invalid characters.
- */
-static int hex_value(char c) {
-    if (c >= '0' && c <= '9') return c - '0';
-    if (c >= 'a' && c <= 'f') return 10 + (c - 'a');
-    if (c >= 'A' && c <= 'F') return 10 + (c - 'A');
-    return -1;
-}
-
 /** @brief Implementation of score_english_hex(). */
 double score_english_hex(const char *hex) {
     size_t hex_len = strlen(hex);
@@ -70,8 +59,8 @@ double score_english_hex(const char *hex) {
 
     // Decode hex on the fly; no need to allocate a separate buffer.
     for (size_t i = 0; i < hex_len; i += 2) {
-        int hi = hex_value(hex[i]);
-        int lo = hex_value(hex[i + 1]);
+        int hi = hex_digit_value(hex[i]);
+        int lo = hex_digit_value(hex[i + 1]);
         if (hi < 0 || lo < 0) {
             // invalid hex character
             return -1e9;
