@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "fixed_xor.h"
 #include "utils.h"
 #include "utest.h"
 
@@ -169,11 +170,71 @@ UTEST(utils_repeat_key, fills_buffer)
 	ASSERT_EQ('I', out[3]);
 }
 
+UTEST(utils_repeat_key, zero_length_output_ok)
+{
+	const char key[] = "ICE";
+	utils_status status = utils_repeat_key(key, NULL, 0);
+	ASSERT_EQ(UTILS_OK, status);
+}
+
 UTEST(utils_repeat_key, rejects_empty_key)
 {
 	uint8_t out[4];
 	utils_status status = utils_repeat_key("", out, sizeof(out));
 	ASSERT_EQ(UTILS_ERR_ARGS, status);
+}
+
+UTEST(utils_repeat_key, encrypts_expected_cipher)
+{
+	const char plaintext[] =
+	    "Burning 'em, if you ain't quick and nimble\n"
+	    "I go crazy when I hear a cymbal";
+	const char expected_hex[] =
+	    "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324"
+	    "272765272a282b2f20430a652e2c652a3124333a653e2b2027630c692b2028316528"
+	    "6326302e27282f";
+
+	size_t plaintext_len = strlen(plaintext);
+	uint8_t *key_stream = malloc(plaintext_len);
+	uint8_t *cipher = malloc(plaintext_len);
+	char *cipher_hex = malloc(plaintext_len * 2 + 1);
+	ASSERT_TRUE(key_stream != NULL);
+	ASSERT_TRUE(cipher != NULL);
+	ASSERT_TRUE(cipher_hex != NULL);
+
+	utils_status status =
+	    utils_repeat_key("ICE", key_stream, plaintext_len);
+	ASSERT_EQ(UTILS_OK, status);
+
+	fixed_xor_status xor_status =
+	    fixed_xor_buffers((const uint8_t *) plaintext,
+	    key_stream, cipher, plaintext_len);
+	ASSERT_EQ(FIXED_XOR_OK, xor_status);
+
+	status =
+	    bytes_to_hex(cipher,
+	    plaintext_len, cipher_hex, plaintext_len * 2 + 1);
+	ASSERT_EQ(UTILS_OK, status);
+	ASSERT_STREQ(expected_hex, cipher_hex);
+
+	free(key_stream);
+	free(cipher);
+	free(cipher_hex);
+}
+
+UTEST(utils_status_string, returns_messages)
+{
+	ASSERT_STREQ("success", utils_status_string(UTILS_OK));
+	ASSERT_STREQ("invalid arguments", utils_status_string(UTILS_ERR_ARGS));
+	ASSERT_STREQ("invalid hex digit",
+	    utils_status_string(UTILS_ERR_INVALID_HEX));
+	ASSERT_STREQ("odd number of hex digits",
+	    utils_status_string(UTILS_ERR_ODD_LENGTH));
+	ASSERT_STREQ("output buffer too small",
+	    utils_status_string(UTILS_ERR_BUFFER_TOO_SMALL));
+	ASSERT_STREQ("out of memory", utils_status_string(UTILS_ERR_OOM));
+	ASSERT_STREQ("failed to score english text",
+	    utils_status_string(UTILS_ERR_SCORE_FAIL));
 }
 
 UTEST_MAIN();
