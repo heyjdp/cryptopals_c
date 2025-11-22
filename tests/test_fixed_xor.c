@@ -160,6 +160,56 @@ UTEST(fixed_xor_stream, large_input_triggers_growth)
 	fclose(out);
 }
 
+UTEST(fixed_xor_stream, io_failure_returns_error)
+{
+	FILE *in = tmpfile();
+	ASSERT_TRUE(in != NULL);
+
+	const uint8_t lhs[] = { 0x01, 0x02 };
+	const uint8_t rhs[] = { 0x03, 0x04 };
+	ASSERT_EQ(sizeof(lhs), fwrite(lhs, 1, sizeof(lhs), in));
+	ASSERT_EQ(sizeof(rhs), fwrite(rhs, 1, sizeof(rhs), in));
+	rewind(in);
+
+	FILE *out = tmpfile();
+	ASSERT_TRUE(out != NULL);
+	out = freopen(NULL, "r", out);
+	ASSERT_TRUE(out != NULL);
+
+	fixed_xor_status status = fixed_xor_stream(in, out);
+	ASSERT_EQ(FIXED_XOR_ERR_IO, status);
+	fclose(in);
+	fclose(out);
+}
+
+UTEST(fixed_xor_stream, rejects_null_arguments)
+{
+	fixed_xor_status status = fixed_xor_stream(NULL, stdout);
+	ASSERT_EQ(FIXED_XOR_ERR_ARGS, status);
+}
+
+UTEST(fixed_xor_stream, simulated_allocation_failure)
+{
+	FILE *in = tmpfile();
+	FILE *out = tmpfile();
+	ASSERT_TRUE(in != NULL);
+	ASSERT_TRUE(out != NULL);
+
+	const uint8_t lhs[] = { 0x01, 0x02 };
+	const uint8_t rhs[] = { 0x03, 0x04 };
+	ASSERT_EQ(sizeof(lhs), fwrite(lhs, 1, sizeof(lhs), in));
+	ASSERT_EQ(sizeof(rhs), fwrite(rhs, 1, sizeof(rhs), in));
+	rewind(in);
+
+	fixed_xor_set_allocation_failure(1);
+	fixed_xor_status status = fixed_xor_stream(in, out);
+	fixed_xor_set_allocation_failure(0);
+	ASSERT_EQ(FIXED_XOR_ERR_OOM, status);
+
+	fclose(in);
+	fclose(out);
+}
+
 UTEST(fixed_xor_status_string, returns_text)
 {
 	ASSERT_STREQ("success", fixed_xor_status_string(FIXED_XOR_OK));

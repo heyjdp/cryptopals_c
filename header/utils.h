@@ -9,54 +9,34 @@
 #include <stddef.h>
 #include <stdint.h>
 
-/**
- * @brief Convert a single hexadecimal digit to its integer value.
- *
- * @param c Character to convert.
- * @return 0-15 for valid hex digits, or -1 on invalid input.
- */
+typedef enum
+{
+	UTILS_OK = 0,
+	UTILS_ERR_ARGS = -1,
+	UTILS_ERR_INVALID_HEX = -2,
+	UTILS_ERR_ODD_LENGTH = -3,
+	UTILS_ERR_BUFFER_TOO_SMALL = -4,
+	UTILS_ERR_OOM = -5,
+	UTILS_ERR_SCORE_FAIL = -6
+} utils_status;
+
 int hex_digit_value(int c);
 
-/**
- * @brief Decode a hex string into bytes.
- *
- * @param hex     Null-terminated hex string.
- * @param out     Destination buffer for decoded bytes.
- * @param out_cap Capacity of @p out.
- * @return Number of bytes written on success, or -1 on error.
- */
-int hex_to_bytes(const char *hex, uint8_t * out, size_t out_cap);
+utils_status hex_to_bytes(const char *hex,
+    uint8_t * out, size_t out_cap, size_t *out_len);
 
-/**
- * @brief Encode bytes into a lowercase hex string.
- *
- * @param bytes   Source buffer.
- * @param len     Number of bytes to encode.
- * @param out_hex Destination buffer (must be at least 2*len+1).
- */
-void bytes_to_hex(const uint8_t * bytes, size_t len, char *out_hex);
+utils_status bytes_to_hex(const uint8_t * bytes,
+    size_t len, char *out_hex, size_t out_cap);
 
-/**
- * @brief Convert a hex string into ASCII characters (best-effort).
- *
- * @param hex        Source hex string.
- * @param ascii_out  Destination buffer for ASCII text.
- * @param ascii_cap  Capacity of @p ascii_out.
- */
-void hex_to_ascii(const char *hex, char *ascii_out, size_t ascii_cap);
+utils_status hex_to_ascii(const char *hex, char *ascii_out, size_t ascii_cap);
 
-/**
- * @brief Brute-force single-byte XOR keys for a hex-encoded string.
- *
- * @param hex_input    Null-terminated hex ciphertext.
- * @param out_plain    Destination buffer for best plaintext bytes.
- * @param out_len      Receives length of plaintext on success.
- * @param out_key      Receives best key byte on success.
- * @param out_score    Receives best score (may be NULL).
- * @return 0 on success, non-zero on error (invalid hex or allocation failure).
- */
-int brute_force_single_byte_xor(const char *hex_input,
+utils_status brute_force_single_byte_xor(const char *hex_input,
     uint8_t * out_plain,
-    size_t *out_len, uint8_t * out_key, double *out_score);
+    size_t out_cap, size_t *out_len, uint8_t * out_key, double *out_score);
+
+utils_status utils_repeat_key(const char *key,
+    uint8_t * out, size_t buffer_len);
+
+const char *utils_status_string(utils_status status);
 
 #endif /* UTILS_H */

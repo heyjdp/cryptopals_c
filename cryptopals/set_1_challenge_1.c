@@ -26,10 +26,11 @@ main(void)
 
 	uint8_t buffer[256];
 	size_t out_len = 0;
-	int rc = hex2b64_buffer((const uint8_t *) hex_input,
+	hex2b64_status status = hex2b64_buffer((const uint8_t *) hex_input,
 	    strlen(hex_input), buffer, sizeof(buffer), &out_len);
-	if (rc != 0) {
-		fprintf(stderr, "hex2b64_buffer failed\n");
+	if (status != HEX2B64_OK) {
+		fprintf(stderr, "hex2b64_buffer: %s\n",
+		    hex2b64_status_string(status));
 		return EXIT_FAILURE;
 	}
 	buffer[out_len] = '\0';

@@ -55,4 +55,11 @@ fixed_xor_status fixed_xor_stream(FILE * in, FILE * out);
  */
 const char *fixed_xor_status_string(fixed_xor_status status);
 
+/**
+ * @brief Test helper to force allocation failures during stream processing.
+ *
+ * @param enable Non-zero to simulate an allocation failure.
+ */
+void fixed_xor_set_allocation_failure(int enable);
+
 #endif /* FIXED_XOR_H */

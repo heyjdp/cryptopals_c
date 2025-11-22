@@ -23,26 +23,46 @@ main(void)
 	uint8_t expected[32];
 	uint8_t result[32];
 
-	int lhs_len = hex_to_bytes(lhs_hex, lhs, sizeof(lhs));
-	int rhs_len = hex_to_bytes(rhs_hex, rhs, sizeof(rhs));
-	int expected_len =
-	    hex_to_bytes(expected_hex, expected, sizeof(expected));
+	size_t lhs_len = 0;
+	size_t rhs_len = 0;
+	size_t expected_len = 0;
 
-	if (lhs_len < 0 || rhs_len < 0 || expected_len < 0 ||
-	    lhs_len != rhs_len || lhs_len != expected_len) {
-		fprintf(stderr, "failed to decode hex inputs\n");
+	utils_status ustatus = hex_to_bytes(lhs_hex,
+	    lhs, sizeof(lhs), &lhs_len);
+	if (ustatus != UTILS_OK) {
+		fprintf(stderr, "lhs hex_to_bytes: %s\n",
+		    utils_status_string(ustatus));
 		return EXIT_FAILURE;
 	}
 
-	fixed_xor_status status =
-	    fixed_xor_buffers(lhs, rhs, result, (size_t) lhs_len);
+	ustatus = hex_to_bytes(rhs_hex, rhs, sizeof(rhs), &rhs_len);
+	if (ustatus != UTILS_OK) {
+		fprintf(stderr, "rhs hex_to_bytes: %s\n",
+		    utils_status_string(ustatus));
+		return EXIT_FAILURE;
+	}
+
+	ustatus = hex_to_bytes(expected_hex,
+	    expected, sizeof(expected), &expected_len);
+	if (ustatus != UTILS_OK) {
+		fprintf(stderr, "expected hex_to_bytes: %s\n",
+		    utils_status_string(ustatus));
+		return EXIT_FAILURE;
+	}
+
+	if (lhs_len != rhs_len || lhs_len != expected_len) {
+		fprintf(stderr, "input buffers differ in length\n");
+		return EXIT_FAILURE;
+	}
+
+	fixed_xor_status status = fixed_xor_buffers(lhs, rhs, result, lhs_len);
 	if (status != FIXED_XOR_OK) {
 		fprintf(stderr, "fixed_xor_buffers failed: %s\n",
 		    fixed_xor_status_string(status));
 		return EXIT_FAILURE;
 	}
 
-	if (memcmp(result, expected, (size_t) expected_len) == 0) {
+	if (memcmp(result, expected, expected_len) == 0) {
 		printf("PASS: %s XOR %s == %s\n", lhs_hex, rhs_hex,
 		    expected_hex);
 		return EXIT_SUCCESS;

@@ -29,8 +29,10 @@ UTEST(hex_digit_value, invalid_digits)
 UTEST(hex_to_bytes, converts_string)
 {
 	uint8_t out[4];
-	int len = hex_to_bytes("deadbeef", out, sizeof(out));
-	ASSERT_EQ(4, len);
+	size_t len = 0;
+	utils_status status = hex_to_bytes("deadbeef", out, sizeof(out), &len);
+	ASSERT_EQ(UTILS_OK, status);
+	ASSERT_EQ(4u, len);
 	EXPECT_EQ(0xDE, out[0]);
 	EXPECT_EQ(0xAD, out[1]);
 	EXPECT_EQ(0xBE, out[2]);
@@ -40,41 +42,63 @@ UTEST(hex_to_bytes, converts_string)
 UTEST(hex_to_bytes, rejects_invalid_hex)
 {
 	uint8_t out[2];
-	EXPECT_EQ(-1, hex_to_bytes("zz", out, sizeof(out)));
+	size_t len = 0;
+	utils_status status = hex_to_bytes("zz", out, sizeof(out), &len);
+	ASSERT_EQ(UTILS_ERR_INVALID_HEX, status);
 }
 
 UTEST(hex_to_bytes, rejects_odd_length)
 {
 	uint8_t out[2];
-	EXPECT_EQ(-1, hex_to_bytes("abc", out, sizeof(out)));
+	utils_status status = hex_to_bytes("abc", out, sizeof(out), NULL);
+	ASSERT_EQ(UTILS_ERR_ODD_LENGTH, status);
 }
 
 UTEST(hex_to_bytes, detects_small_buffer)
 {
 	uint8_t out[1];
-	EXPECT_EQ(-1, hex_to_bytes("abcd", out, sizeof(out)));
+	utils_status status = hex_to_bytes("abcd", out, sizeof(out), NULL);
+	ASSERT_EQ(UTILS_ERR_BUFFER_TOO_SMALL, status);
+}
+
+UTEST(hex_to_bytes, rejects_null_buffer)
+{
+	utils_status status = hex_to_bytes("aa", NULL, 1, NULL);
+	ASSERT_EQ(UTILS_ERR_ARGS, status);
 }
 
 UTEST(bytes_to_hex, round_trip)
 {
 	const uint8_t bytes[] = { 0x41, 0x42, 0x43 };
 	char hex[7];
-	bytes_to_hex(bytes, sizeof(bytes), hex);
+	utils_status status =
+	    bytes_to_hex(bytes, sizeof(bytes), hex, sizeof(hex));
+	ASSERT_EQ(UTILS_OK, status);
 	ASSERT_STREQ("414243", hex);
+}
+
+UTEST(bytes_to_hex, buffer_too_small)
+{
+	const uint8_t bytes[] = { 0x41 };
+	char hex[2];
+	utils_status status =
+	    bytes_to_hex(bytes, sizeof(bytes), hex, sizeof(hex));
+	ASSERT_EQ(UTILS_ERR_BUFFER_TOO_SMALL, status);
 }
 
 UTEST(hex_to_ascii, converts_string)
 {
 	char out[4];
-	hex_to_ascii("414243", out, sizeof(out));
+	utils_status status = hex_to_ascii("414243", out, sizeof(out));
+	ASSERT_EQ(UTILS_OK, status);
 	ASSERT_STREQ("ABC", out);
 }
 
 UTEST(hex_to_ascii, truncates_when_short)
 {
 	char out[3];
-	hex_to_ascii("414243", out, sizeof(out));
-	ASSERT_STREQ("AB", out);
+	utils_status status = hex_to_ascii("414243", out, sizeof(out));
+	ASSERT_EQ(UTILS_ERR_BUFFER_TOO_SMALL, status);
 }
 
 UTEST(brute_force_single_byte_xor, decodes_known_cipher)
@@ -86,26 +110,70 @@ UTEST(brute_force_single_byte_xor, decodes_known_cipher)
 	uint8_t key = 0;
 	double score = 0.0;
 
-	int rc = brute_force_single_byte_xor(hex, plain, &len, &key, &score);
-	ASSERT_EQ(0, rc);
+	utils_status status = brute_force_single_byte_xor(hex,
+	    plain, sizeof(plain), &len, &key, &score);
+	ASSERT_EQ(UTILS_OK, status);
 	ASSERT_GT(score, -100.0);
 	ASSERT_NE(0u, len);
 
 	char ascii[128];
 	char encoded[256];
-	bytes_to_hex(plain, len, encoded);
-	hex_to_ascii(encoded, ascii, sizeof(ascii));
+	ASSERT_EQ(UTILS_OK,
+	    bytes_to_hex(plain, len, encoded, sizeof(encoded)));
+	ASSERT_EQ(UTILS_OK, hex_to_ascii(encoded, ascii, sizeof(ascii)));
 	ASSERT_STREQ("Cooking MC's like a pound of bacon", ascii);
 }
 
-UTEST(brute_force_single_byte_xor, invalid_input)
+UTEST(brute_force_single_byte_xor, invalid_hex_input)
 {
 	uint8_t plain[8];
 	size_t len = 0;
 	uint8_t key = 0;
-	const char bad_hex[] = "zzz";
-	EXPECT_NE(0, brute_force_single_byte_xor(bad_hex, plain, &len, &key,
-		NULL));
+	const char bad_hex[] = "zz";
+	utils_status status = brute_force_single_byte_xor(bad_hex,
+	    plain, sizeof(plain), &len, &key, NULL);
+	ASSERT_EQ(UTILS_ERR_INVALID_HEX, status);
+}
+
+UTEST(brute_force_single_byte_xor, odd_length_input)
+{
+	uint8_t plain[8];
+	size_t len = 0;
+	uint8_t key = 0;
+	const char odd_hex[] = "123";
+	utils_status status = brute_force_single_byte_xor(odd_hex,
+	    plain, sizeof(plain), &len, &key, NULL);
+	ASSERT_EQ(UTILS_ERR_ODD_LENGTH, status);
+}
+
+UTEST(brute_force_single_byte_xor, insufficient_output_buffer)
+{
+	const char hex[] = "abcd";
+	uint8_t plain[1];
+	size_t len = 0;
+	uint8_t key = 0;
+	utils_status status = brute_force_single_byte_xor(hex,
+	    plain, sizeof(plain), &len, &key, NULL);
+	ASSERT_EQ(UTILS_ERR_BUFFER_TOO_SMALL, status);
+}
+
+UTEST(utils_repeat_key, fills_buffer)
+{
+	const char key[] = "ICE";
+	uint8_t out[8];
+	utils_status status = utils_repeat_key(key, out, sizeof(out));
+	ASSERT_EQ(UTILS_OK, status);
+	ASSERT_EQ('I', out[0]);
+	ASSERT_EQ('C', out[1]);
+	ASSERT_EQ('E', out[2]);
+	ASSERT_EQ('I', out[3]);
+}
+
+UTEST(utils_repeat_key, rejects_empty_key)
+{
+	uint8_t out[4];
+	utils_status status = utils_repeat_key("", out, sizeof(out));
+	ASSERT_EQ(UTILS_ERR_ARGS, status);
 }
 
 UTEST_MAIN();

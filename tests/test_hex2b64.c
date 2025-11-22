@@ -13,7 +13,7 @@
 /*
  * Run hex2b64_stream() over an in-memory string and capture its output in out.
  */
-static int
+static hex2b64_status
 convert_hex_string(const char *hex, char *out, size_t out_cap)
 {
 	FILE *in = tmpfile();
@@ -29,7 +29,7 @@ convert_hex_string(const char *hex, char *out, size_t out_cap)
 	fputs(hex, in);
 	rewind(in);
 
-	int rc = hex2b64_stream(in, outf);
+	hex2b64_status status = hex2b64_stream(in, outf);
 
 	fflush(outf);
 	rewind(outf);
@@ -40,13 +40,13 @@ convert_hex_string(const char *hex, char *out, size_t out_cap)
 	fclose(in);
 	fclose(outf);
 
-	return rc;
+	return status;
 }
 
 /*
  * Convenience wrapper around hex2b64_buffer() for string literals.
  */
-static int
+static hex2b64_status
 convert_hex_buffer(const char *hex,
     uint8_t *out, size_t out_cap, size_t *out_len)
 {
@@ -59,9 +59,9 @@ convert_hex_buffer(const char *hex,
 UTEST(stream, hello_world_plain)
 {
 	char out[128];
-	int rc =
+	hex2b64_status status =
 	    convert_hex_string("48656c6c6f20776f726c64", out, sizeof(out));
-	ASSERT_EQ(0, rc);
+	ASSERT_EQ(HEX2B64_OK, status);
 	/* "Hello world" in Base64 plus newline */
 	ASSERT_STREQ("SGVsbG8gd29ybGQ=\n", out);
 }
@@ -69,9 +69,10 @@ UTEST(stream, hello_world_plain)
 UTEST(stream, ignores_whitespace)
 {
 	char out[128];
-	int rc = convert_hex_string("48 65 6c 6c 6f 20 77 6f 72 6c 64\n",
+	hex2b64_status status =
+	    convert_hex_string("48 65 6c 6c 6f 20 77 6f 72 6c 64\n",
 	    out, sizeof(out));
-	ASSERT_EQ(0, rc);
+	ASSERT_EQ(HEX2B64_OK, status);
 	ASSERT_STREQ("SGVsbG8gd29ybGQ=\n", out);
 }
 
@@ -79,9 +80,9 @@ UTEST(stream, ignores_whitespace)
 UTEST(stream, mixed_case_hex)
 {
 	char out[128];
-	int rc =
+	hex2b64_status status =
 	    convert_hex_string("48656C6c6F20776F726C64", out, sizeof(out));
-	ASSERT_EQ(0, rc);
+	ASSERT_EQ(HEX2B64_OK, status);
 	ASSERT_STREQ("SGVsbG8gd29ybGQ=\n", out);
 }
 
@@ -91,8 +92,8 @@ UTEST(stream, mixed_case_hex)
 UTEST(stream_edge, empty_input)
 {
 	char out[128];
-	int rc = convert_hex_string("", out, sizeof(out));
-	ASSERT_EQ(0, rc);
+	hex2b64_status status = convert_hex_string("", out, sizeof(out));
+	ASSERT_EQ(HEX2B64_OK, status);
 	ASSERT_STREQ("\n", out);
 }
 
@@ -100,8 +101,9 @@ UTEST(stream_edge, empty_input)
 UTEST(stream_edge, whitespace_only)
 {
 	char out[128];
-	int rc = convert_hex_string("   \n\t  ", out, sizeof(out));
-	ASSERT_EQ(0, rc);
+	hex2b64_status status =
+	    convert_hex_string("   \n\t  ", out, sizeof(out));
+	ASSERT_EQ(HEX2B64_OK, status);
 	ASSERT_STREQ("\n", out);
 }
 
@@ -109,8 +111,8 @@ UTEST(stream_edge, whitespace_only)
 UTEST(stream_edge, single_byte)
 {
 	char out[128];
-	int rc = convert_hex_string("4d", out, sizeof(out));	/* 'M' */
-	ASSERT_EQ(0, rc);
+	hex2b64_status status = convert_hex_string("4d", out, sizeof(out));	/* 'M' */
+	ASSERT_EQ(HEX2B64_OK, status);
 	ASSERT_STREQ("TQ==\n", out);
 }
 
@@ -118,8 +120,8 @@ UTEST(stream_edge, single_byte)
 UTEST(stream_edge, two_bytes)
 {
 	char out[128];
-	int rc = convert_hex_string("4d61", out, sizeof(out));	/* "Ma" */
-	ASSERT_EQ(0, rc);
+	hex2b64_status status = convert_hex_string("4d61", out, sizeof(out));	/* "Ma" */
+	ASSERT_EQ(HEX2B64_OK, status);
 	ASSERT_STREQ("TWE=\n", out);
 }
 
@@ -127,8 +129,8 @@ UTEST(stream_edge, two_bytes)
 UTEST(stream_edge, three_bytes)
 {
 	char out[128];
-	int rc = convert_hex_string("4d616e", out, sizeof(out));	/* "Man" */
-	ASSERT_EQ(0, rc);
+	hex2b64_status status = convert_hex_string("4d616e", out, sizeof(out));	/* "Man" */
+	ASSERT_EQ(HEX2B64_OK, status);
 	ASSERT_STREQ("TWFu\n", out);
 }
 
@@ -136,24 +138,27 @@ UTEST(stream_edge, three_bytes)
 UTEST(stream_edge, odd_number_of_digits_is_error)
 {
 	char out[128];
-	int rc = convert_hex_string("48656c6c6f7", out, sizeof(out));
-	ASSERT_NE(0, rc);	/* Should fail */
+	hex2b64_status status =
+	    convert_hex_string("48656c6c6f7", out, sizeof(out));
+	ASSERT_EQ(HEX2B64_ERR_ODD_DIGITS, status);
 }
 
 /* Invalid hex character in the middle: error. */
 UTEST(stream_edge, invalid_char_in_middle)
 {
 	char out[128];
-	int rc = convert_hex_string("48656x6c6f", out, sizeof(out));
-	ASSERT_NE(0, rc);	/* Should fail */
+	hex2b64_status status =
+	    convert_hex_string("48656x6c6f", out, sizeof(out));
+	ASSERT_EQ(HEX2B64_ERR_INVALID_HEX, status);
 }
 
 /* Invalid hex character as first non-whitespace: error. */
 UTEST(stream_edge, invalid_first_char)
 {
 	char out[128];
-	int rc = convert_hex_string("z8656c6c6f", out, sizeof(out));
-	ASSERT_NE(0, rc);	/* Should fail */
+	hex2b64_status status =
+	    convert_hex_string("z8656c6c6f", out, sizeof(out));
+	ASSERT_EQ(HEX2B64_ERR_INVALID_HEX, status);
 }
 
 /* Large-ish input: many 'A' bytes (0x41) – just sanity check result shape. */
@@ -170,8 +175,8 @@ UTEST(stream_edge, many_bytes_sanity)
 	}
 	hex[2 * 100] = '\0';
 
-	int rc = convert_hex_string(hex, out, sizeof(out));
-	ASSERT_EQ(0, rc);
+	hex2b64_status status = convert_hex_string(hex, out, sizeof(out));
+	ASSERT_EQ(HEX2B64_OK, status);
 
 	/* Just basic sanity: output must end with '\n' and be non-empty. */
 	size_t len = strlen(out);
@@ -185,11 +190,11 @@ UTEST(buffer, hello_world_plain)
 {
 	uint8_t out[128];
 	size_t out_len = 0;
-	int rc = convert_hex_buffer("48656c6c6f20776f726c64",
+	hex2b64_status status = convert_hex_buffer("48656c6c6f20776f726c64",
 	    out,
 	    sizeof(out),
 	    &out_len);
-	ASSERT_EQ(0, rc);
+	ASSERT_EQ(HEX2B64_OK, status);
 	ASSERT_EQ(strlen("SGVsbG8gd29ybGQ=\n"), out_len);
 	out[out_len] = '\0';
 	ASSERT_STREQ("SGVsbG8gd29ybGQ=\n", (const char *) out);
@@ -199,11 +204,11 @@ UTEST(buffer, ignores_whitespace)
 {
 	uint8_t out[128];
 	size_t out_len = 0;
-	int rc = convert_hex_buffer("48 65 6c 6c 6f",
+	hex2b64_status status = convert_hex_buffer("48 65 6c 6c 6f",
 	    out,
 	    sizeof(out),
 	    &out_len);
-	ASSERT_EQ(0, rc);
+	ASSERT_EQ(HEX2B64_OK, status);
 	out[out_len] = '\0';
 	ASSERT_STREQ("SGVsbG8=\n", (const char *) out);
 }
@@ -212,11 +217,11 @@ UTEST(buffer, empty_input)
 {
 	uint8_t out[8];
 	size_t out_len = 0;
-	int rc = convert_hex_buffer("",
+	hex2b64_status status = convert_hex_buffer("",
 	    out,
 	    sizeof(out),
 	    &out_len);
-	ASSERT_EQ(0, rc);
+	ASSERT_EQ(HEX2B64_OK, status);
 	ASSERT_EQ(1u, out_len);
 	out[out_len] = '\0';
 	ASSERT_STREQ("\n", (const char *) out);
@@ -226,33 +231,65 @@ UTEST(buffer_edge, odd_digits_error)
 {
 	uint8_t out[16];
 	size_t out_len = 0;
-	int rc = convert_hex_buffer("123",
+	hex2b64_status status = convert_hex_buffer("123",
 	    out,
 	    sizeof(out),
 	    &out_len);
-	ASSERT_NE(0, rc);
+	ASSERT_EQ(HEX2B64_ERR_ODD_DIGITS, status);
 }
 
 UTEST(buffer_edge, invalid_character)
 {
 	uint8_t out[16];
 	size_t out_len = 0;
-	int rc = convert_hex_buffer("48xx",
+	hex2b64_status status = convert_hex_buffer("48xx",
 	    out,
 	    sizeof(out),
 	    &out_len);
-	ASSERT_NE(0, rc);
+	ASSERT_EQ(HEX2B64_ERR_INVALID_HEX, status);
 }
 
 UTEST(buffer_edge, insufficient_output_capacity)
 {
 	uint8_t out[4];
 	size_t out_len = 0;
-	int rc = convert_hex_buffer("4d",
+	hex2b64_status status = convert_hex_buffer("4d",
 	    out,
 	    sizeof(out),
 	    &out_len);
-	ASSERT_NE(0, rc);
+	ASSERT_EQ(HEX2B64_ERR_OUTPUT_OVERFLOW, status);
+}
+
+UTEST(buffer_edge, null_output)
+{
+	size_t out_len = 0;
+	hex2b64_status status =
+	    hex2b64_buffer((const uint8_t *) "4d", 2, NULL, 0, &out_len);
+	ASSERT_EQ(HEX2B64_ERR_ARGS, status);
+}
+
+UTEST(stream_edge, io_failure_is_reported)
+{
+	FILE *in = tmpfile();
+	ASSERT_TRUE(in != NULL);
+	fputs("4d", in);
+	rewind(in);
+
+	FILE *out = tmpfile();
+	ASSERT_TRUE(out != NULL);
+	out = freopen(NULL, "r", out);
+	ASSERT_TRUE(out != NULL);
+
+	hex2b64_status status = hex2b64_stream(in, out);
+	ASSERT_EQ(HEX2B64_ERR_IO, status);
+	fclose(in);
+	fclose(out);
+}
+
+UTEST(stream_edge, null_arguments_rejected)
+{
+	hex2b64_status status = hex2b64_stream(NULL, stdout);
+	ASSERT_EQ(HEX2B64_ERR_ARGS, status);
 }
 
 /* Let utest.h provide main(). */

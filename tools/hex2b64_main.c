@@ -4,15 +4,18 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "hex2b64.h"
 
-/**
- * @brief Entry point that wires stdin/stdout through hex2b64_stream().
- *
- * @return 0 on success, non-zero if conversion fails.
- */
 int
 main(void)
 {
-	return hex2b64_stream(stdin, stdout);
+	hex2b64_status status = hex2b64_stream(stdin, stdout);
+	if (status != HEX2B64_OK) {
+		fprintf(stderr, "hex2b64: %s\n",
+		    hex2b64_status_string(status));
+		return EXIT_FAILURE;
+	}
+	return EXIT_SUCCESS;
 }

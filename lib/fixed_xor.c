@@ -14,6 +14,14 @@
 
 #define FIXED_XOR_CHUNK 4096
 
+static int fixed_xor_force_oom = 0;
+
+void
+fixed_xor_set_allocation_failure(int enable)
+{
+	fixed_xor_force_oom = enable;
+}
+
 /** @brief Implementation of fixed_xor_buffers(). */
 fixed_xor_status
 fixed_xor_buffers(const uint8_t *lhs,
@@ -42,6 +50,10 @@ fixed_xor_buffers(const uint8_t *lhs,
 static fixed_xor_status
 fixed_xor_grow(uint8_t **buffer, size_t *capacity, size_t required)
 {
+	if (fixed_xor_force_oom) {
+		return FIXED_XOR_ERR_OOM;
+	}
+
 	size_t new_capacity = *capacity;
 	while (required > new_capacity) {
 		if (new_capacity > (SIZE_MAX / 2)) {
@@ -71,6 +83,9 @@ fixed_xor_stream(FILE *in, FILE *out)
 	if (!in || !out) {
 		errno = EINVAL;
 		return FIXED_XOR_ERR_ARGS;
+	}
+	if (fixed_xor_force_oom) {
+		return FIXED_XOR_ERR_OOM;
 	}
 
 	size_t capacity = FIXED_XOR_CHUNK;

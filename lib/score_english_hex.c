@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "score_english_hex.h"
 #include "utils.h"
 
 /**
@@ -45,14 +46,38 @@ static const double english_freq[27] = {
 	0.1300			// space (very common in normal English text)
 };
 
-/** @brief Implementation of score_english_hex(). */
-double
-score_english_hex(const char *hex)
+const char *
+score_english_hex_status_string(score_english_hex_status status)
 {
+	switch (status) {
+	case SCORE_ENGLISH_HEX_OK:
+		return "success";
+	case SCORE_ENGLISH_HEX_ERR_ARGS:
+		return "invalid arguments";
+	case SCORE_ENGLISH_HEX_ERR_EMPTY:
+		return "empty hex string";
+	case SCORE_ENGLISH_HEX_ERR_ODD_LENGTH:
+		return "odd number of hex digits";
+	case SCORE_ENGLISH_HEX_ERR_INVALID_HEX:
+		return "invalid hex digit";
+	default:
+		return "unknown score_english_hex error";
+	}
+}
+
+score_english_hex_status
+score_english_hex(const char *hex, double *score_out)
+{
+	if (!hex || !score_out) {
+		return SCORE_ENGLISH_HEX_ERR_ARGS;
+	}
+
 	size_t hex_len = strlen(hex);
-	if (hex_len == 0 || (hex_len & 1)) {
-		// empty or odd-length hex is invalid
-		return -1e9;
+	if (hex_len == 0) {
+		return SCORE_ENGLISH_HEX_ERR_EMPTY;
+	}
+	if (hex_len & 1U) {
+		return SCORE_ENGLISH_HEX_ERR_ODD_LENGTH;
 	}
 
 	int counts[27] = { 0 };	// letter+space counts
@@ -65,8 +90,7 @@ score_english_hex(const char *hex)
 		int hi = hex_digit_value(hex[i]);
 		int lo = hex_digit_value(hex[i + 1]);
 		if (hi < 0 || lo < 0) {
-			// invalid hex character
-			return -1e9;
+			return SCORE_ENGLISH_HEX_ERR_INVALID_HEX;
 		}
 
 		uint8_t c = (uint8_t) ((hi << 4) | lo);
@@ -92,10 +116,11 @@ score_english_hex(const char *hex)
 	}
 
 	if (total_bytes == 0) {
-		return -1e9;
+		return SCORE_ENGLISH_HEX_ERR_EMPTY;
 	}
 	if (total_letters == 0) {
-		return -1000.0 - penalty;
+		*score_out = -1000.0 - penalty;
+		return SCORE_ENGLISH_HEX_OK;
 	}
 	// Compute a chi-squared style statistic over letters+space.
 	// Lower chi2 means closer to English; we will invert it into a score.
@@ -113,5 +138,6 @@ score_english_hex(const char *hex)
 	double letter_ratio = (double) total_letters / (double) total_bytes;
 	double score = -chi2 + letter_ratio * 50.0 - penalty;
 
-	return score;
+	*score_out = score;
+	return SCORE_ENGLISH_HEX_OK;
 }
