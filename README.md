@@ -33,6 +33,29 @@ There is a doxygen PDF in `./docs`
 
 ---
 
+## Third-party dependencies
+
+Unit tests rely on the excellent
+[`utest.h`](https://github.com/sheredom/utest.h) project, which is vendored
+as a Git submodule at `third_party/utest.h`. After cloning this repository,
+pull the dependency with:
+
+```bash
+git submodule update --init --recursive
+```
+
+To refresh the dependency at a later date, run:
+
+```bash
+git submodule update --remote third_party/utest.h
+```
+
+If your environment blocks outbound network access (as is common in some
+CI/automation setups), make sure the required `utest.h` sources are available
+before attempting to build or run the tests.
+
+---
+
 ## Requirements
 
 - **C99 or newer**

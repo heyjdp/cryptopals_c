@@ -9,6 +9,7 @@ EXTRACT_STATIC         = YES
 EXTRACT_ALL            = YES
 EXTRACT_PRIVATE        = NO
 INPUT                  = header lib tools cryptopals tests README.md
+EXCLUDE                = third_party
 FILE_PATTERNS          = *.c *.h *.md
 RECURSIVE              = YES
 INPUT_ENCODING         = UTF-8
@@ -56,7 +57,7 @@ OPTIMIZE_OUTPUT_FOR_C  = YES
 #---------------------------------------------------------------------------
 
 INPUT                  = header lib tools cryptopals README.md
-EXCLUDE                =  ./header/utest.h
+EXCLUDE                = third_party
 FILE_PATTERNS          = *.c *.h *.md
 USE_MDFILE_AS_MAINPAGE = README.md
 RECURSIVE              = YES

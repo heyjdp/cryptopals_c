@@ -11,7 +11,7 @@ BIN_DIR := bin
 TEST_BIN_DIR := $(BIN_DIR)/tests
 CRYPT_DIR := cryptopals
 
-CPPFLAGS += -I$(HEADER_DIR)
+CPPFLAGS += -I$(HEADER_DIR) -Ithird_party/utest.h
 
 LIBS := utils hex2b64 fixed_xor score_english_hex
 TOOLS := hex2b64 fixed_xor
